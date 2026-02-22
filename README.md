@@ -1,16 +1,19 @@
-# React + Vite
+# AmoxSQL Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the repository for the **AmoxSQL** website and documentation — a modern, local-first SQL IDE for DuckDB. Built with React, Vite, and designed with a glassmorphism and modern aesthetic.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- **Responsive Design**: Beautiful interface across all device sizes.
+- **Internationalization (i18n)**: Full English and Spanish support using a lightweight Context API.
+- **Documentation Viewer**: An integrated markdown viewer (`DocViewer`) that reads documentation dynamically from `public/docs/`.
+- **Modern UI**: Dark mode default, interactive hover states, glassmorphism, and smooth animations.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack
+- React 19
+- Vite
+- React Router DOM
+- Icons by Lucide React
+- Markdown rendering with `react-markdown`
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📄 License
+This website is open source and available under the MIT License, while AmoxSQL itself is available under the Source Available License.

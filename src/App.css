@@ -140,19 +140,48 @@ main {
    Mobile – Responsive
    ═══════════════════════════════════════════════ */
 
-@media (max-width: 640px) {
+@media (max-width: 800px) {
+  .navbar {
+    height: auto;
+    padding: 14px 0 0 0;
+  }
+
+  .nav-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
   .nav-links {
-    gap: 4px;
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    padding: 0 1rem 12px 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
   }
 
-  .nav-link {
-    font-size: 0.82rem;
-    padding: 6px 10px;
+  /* Hide scrollbar for a cleaner look */
+  .nav-links::-webkit-scrollbar {
+    display: none;
   }
 
-  .nav-gh-btn {
-    padding: 6px 12px;
-    font-size: 0.8rem;
-    margin-left: 4px;
+  .nav-links {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .nav-link,
+  .nav-gh-btn,
+  .lang-switcher,
+  .nav-sponsor-btn {
+    flex-shrink: 0;
+  }
+
+  main {
+    padding-top: 110px;
+    /* Account for taller navbar */
   }
 }
