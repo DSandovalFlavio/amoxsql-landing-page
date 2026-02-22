@@ -12,7 +12,7 @@ const translations = {
 
         // Hero
         hero: {
-            badge: 'Built for DuckDB · v1.1',
+            badge: 'Built for data people · v1.1',
             titleMuted1: 'The Modern Codex',
             titleMuted2: 'for Local',
             titleAccent: 'Data Analysis',
