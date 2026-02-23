@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Github, Globe, Heart } from 'lucide-react';
 import { LanguageProvider, useTranslation } from './i18n';
+import { trackEvent } from './analytics';
 import './App.css';
 import Home from './pages/Home';
 import DocsLayout from './pages/DocsLayout';
@@ -73,6 +74,7 @@ function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="nav-sponsor-btn"
+            onClick={() => trackEvent('sponsor_click', { location: 'navbar' })}
           >
             <Heart size={15} />
             {t('nav.sponsor')}
@@ -83,6 +85,7 @@ function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             className="nav-gh-btn"
+            onClick={() => trackEvent('github_click', { location: 'navbar' })}
           >
             <Github size={16} />
             GitHub

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Download, ArrowRight, Monitor, Code, Shield, Heart } from 'lucide-react';
 import { useTranslation } from '../i18n';
+import { trackEvent } from '../analytics';
 
 const DownloadCTA = () => {
   const { t } = useTranslation();
@@ -27,6 +28,7 @@ const DownloadCTA = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-glowing cta-btn-main"
+              onClick={() => trackEvent('download_click', { location: 'cta' })}
             >
               <Download size={20} />
               {t('cta.downloadBtn')}
@@ -37,6 +39,7 @@ const DownloadCTA = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-sponsor"
+              onClick={() => trackEvent('sponsor_click', { location: 'cta' })}
             >
               <Heart size={18} />
               {t('cta.sponsorBtn')}

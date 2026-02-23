@@ -1,6 +1,7 @@
 import React from 'react';
 import { Download, Github, ChevronRight } from 'lucide-react';
 import { useTranslation } from '../i18n';
+import { trackEvent } from '../analytics';
 
 const Hero = () => {
   const { t } = useTranslation();
@@ -36,6 +37,7 @@ const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
+              onClick={() => trackEvent('download_click', { location: 'hero' })}
             >
               <Download size={18} />
               {t('hero.downloadBtn')}
@@ -45,6 +47,7 @@ const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline"
+              onClick={() => trackEvent('github_click', { location: 'hero' })}
             >
               <Github size={18} />
               {t('hero.githubBtn')}

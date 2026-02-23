@@ -2,6 +2,7 @@ import React from 'react';
 import { Github, Heart } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from '../i18n';
+import { trackEvent } from '../analytics';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -50,14 +51,14 @@ const Footer = () => {
             <h4 className="footer-heading">{t('footer.productHeading')}</h4>
             <a href="#features" onClick={scrollTo('features')}>{t('footer.features')}</a>
             <a href="#ai" onClick={scrollTo('ai')}>{t('footer.aiAssistant')}</a>
-            <a href="https://github.com/dsandovalflavio/amoxsql/releases" target="_blank" rel="noopener noreferrer">{t('footer.download')}</a>
-            <a href="https://github.com/sponsors/dsandovalflavio" target="_blank" rel="noopener noreferrer" className="footer-sponsor-link">♥ {t('footer.sponsor')}</a>
+            <a href="https://github.com/dsandovalflavio/amoxsql/releases" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('download_click', { location: 'footer' })}>{t('footer.download')}</a>
+            <a href="https://github.com/sponsors/dsandovalflavio" target="_blank" rel="noopener noreferrer" className="footer-sponsor-link" onClick={() => trackEvent('sponsor_click', { location: 'footer' })}>♥ {t('footer.sponsor')}</a>
           </div>
 
           <div className="footer-links-group">
             <h4 className="footer-heading">{t('footer.resourcesHeading')}</h4>
             <Link to="/docs">{t('footer.documentation')}</Link>
-            <a href="https://github.com/dsandovalflavio/amoxsql" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://github.com/dsandovalflavio/amoxsql" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('github_click', { location: 'footer' })}>GitHub</a>
             <a href="#story" onClick={scrollTo('story')}>{t('footer.originStory')}</a>
           </div>
 
