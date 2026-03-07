@@ -6,7 +6,20 @@ A continuación, documentamos de forma exhaustiva los sistemas fundamentales y e
 
 ---
 
-## 1. Diseño Centrado en Proyectos (Project-Centric Workflow)
+## 1. La Paleta de Comandos Central (`CommandPalette.jsx`)
+
+Para garantizar un flujo de trabajo optimizado para teclado (*"Keyboard-First Workflow"*), la adición más trascendental en la usabilidad global de AmoxSQL es el Lanzador Omnipresente (accesible globalmente con `Ctrl+K` o `Cmd+K`). 
+
+A diferencia de depender de menús lentos de barra superior, el motor de la Paleta indexa instantáneamente un registro dinámico de acciones. Actúa como el sistema nervioso central, delegando operaciones directas como:
+*   `Run Query` (`Ctrl+Enter`): Dispara llamadas asíncronas hacia el motor.
+*   `Save File` (`Ctrl+S`): Serializa el estado del editor en disco magnético local sin tocar la UI.
+*   `Navigation / Extensions`: Invoca cambios reactivos sobre el Layout Manager para mutar el acordeón de la izquierda o forzar apertura de inteligencias IA con un click.
+
+Cada una de estas acciones y accesos directos puede auditarse de manera gráfica mediante el `KeyboardShortcutsModal.jsx`, permitiendo al usuario conocer todos los "Hotkeys" de forma unificada.
+
+---
+
+## 2. Diseño Centrado en Proyectos (Project-Centric Workflow)
 
 AmoxSQL abandona la idea clásica de las herramientas de gestión de bases de datos que exigen credenciales estáticas y puertos abiertos. Al funcionar con una base de datos *Serverless* e *In-Process* como **DuckDB**, el concepto de conexión evoluciona a un concepto de entorno de trabajo basado completamente en el sistema de archivos del usuario.
 
@@ -21,7 +34,7 @@ AmoxSQL abandona la idea clásica de las herramientas de gestión de bases de da
 
 ---
 
-## 2. Gestión Robusta de Conexiones (Connection Management & Hard Reset)
+## 3. Gestión Robusta de Conexiones (Connection Management & Hard Reset)
 
 Bajo el capó, en el servidor, existe un Singleton en Node.js vital llamado **`DatabaseManager.js`**. Su objetivo principal es evitar las temidas "fugas de memoria" o los problemas de archivos binarios bloqueados por cierres no controlados de bases de datos transaccionales, común en Windows OS.
 
@@ -41,7 +54,7 @@ Debido a que Node y DuckDB C++ viven en una co-dependencias muy apretadas de pro
 
 ---
 
-## 3. Arquitectura de Interfaz Multi-Pestaña y Vistas (Layout Manager)
+## 4. Arquitectura de Interfaz Multi-Pestaña y Vistas (Layout Manager)
 
 Para igualar la flexibilidad y la libertad arquitectónica y UX que proponen sistemas masivos como Eclipse, VS Code o Jetbrains, AmoxSQL implementa su propio motor de partición y estado usando un módulo denominado `LayoutManager.jsx`. No es simplemente re-dibujar divs; es almacenar un ciclo completo del documento y el buffer de la interfaz en memoria.
 
@@ -58,3 +71,6 @@ La ventana principal de AmoxSQL está diseñada en secciones flexibles que puede
     *   Permite alternar para evaluar la Data plana en la grilla virtual de `ResultsTable.jsx`.
     *   Alternar a los análisis visuales en `DataVisualizer.jsx`.
     *   Este sistema dual Panel Central de Edición + Panel Inferior de Resultados promueve una iteratividad cíclica en la construcción del Query y Visualización, reduciendo los tiempos en validación y confirmación y facilitando la depuración directa con vista a la fuente de la verdad de los datos en tiempo real.
+
+### Persistencia Visual del Layout
+La ergonomía de la herramienta está asegurada en el ciclo de vida del programa. Si el usuario arrastra la frontera de los `Split Views` haciéndolos de `250px` a `400px` para poder leer tablas con nombres larguísimos, o si decide anclar un tema *Light Mode* o *Dark Mode* vía configuraciones unificadas, el sistema almacena las tolerancias y preferencias (`LayoutWidth`, `Theme`) a nivel de `localStorage` y en archivos de perfil del usuario de Electron para que, la próxima vez que AmoxSQL abra cualquier proyecto de manera nativa, todas las ventanas y preferencias se re-acomoden como se dejaron en milisegundos.

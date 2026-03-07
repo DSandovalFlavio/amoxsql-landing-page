@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Code2, Database, BarChart3, FileText, Brain, GitBranch } from 'lucide-react';
+import { Code2, Database, BarChart3, FileText, Brain, GitBranch, Workflow } from 'lucide-react';
 import { useTranslation } from '../i18n';
 
 const featureConfig = [
@@ -9,6 +9,7 @@ const featureConfig = [
   { id: 'notebooks', icon: <FileText size={22} />, image: 'sql-notebboks.png', accentColor: 'green' },
   { id: 'ai', icon: <Brain size={22} />, image: 'ollamaserttings.png', accentColor: 'cyan' },
   { id: 'debugging', icon: <GitBranch size={22} />, image: 'analize-execution-plan.png', accentColor: 'green' },
+  { id: 'dbt', icon: <Workflow size={22} />, image: 'sql-table-viewer.png', accentColor: 'cyan' },
 ];
 
 const FeatureShowcase = () => {
@@ -134,9 +135,9 @@ const FeatureShowcase = () => {
 
         .feature-tab.active {
           color: var(--accent-cyan);
-          border-color: rgba(0, 229, 255, 0.4);
-          background: rgba(0, 229, 255, 0.06);
-          box-shadow: 0 0 20px rgba(0, 229, 255, 0.08);
+          border-color: rgba(0, 218, 255, 0.3);
+          background: rgba(0, 218, 255, 0.05);
+          box-shadow: 0 0 15px rgba(0, 218, 255, 0.05);
         }
 
         .tab-icon {
@@ -227,7 +228,7 @@ const FeatureShowcase = () => {
         }
 
         .preview-frame:hover {
-          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 255, 0.06);
+          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 218, 255, 0.04);
           border-color: var(--border-strong);
         }
 

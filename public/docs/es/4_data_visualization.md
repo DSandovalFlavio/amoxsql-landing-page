@@ -40,6 +40,11 @@ El usuario puede cambiar la representación en sus ejes (Y y Tooltips):
 *   **Currency (Moneda):** Pone el prefijo de dólar o moneda parametrizada.
 *   **Porcentaje:** Intercepta Tooltips decimales multiplicando base cien.
 
+### Accesibilidad: Paneles y Vistas por Defecto
+El usuario actual (v1.6.0) posee controles explícitos para la lectura sobrecargada a través del `SettingsModal`.
+*   **Control de Fuentes (Independent Font-Size Controls):** El tamaño de las celdas y filas en Results se puede variar entre 11px a 16px para incrementar la densidad o relajar la fatiga de escrutinio.
+*   **Default View (Vista Personalizada):** Una preferencia guardada de *LocalStorage* para forzar a que AmoxSQL abra siempre en la pestaña "Chart" (Ideal para Gerentes) o en "Table" o "Profile" si lo ocupa un Ingeniero.
+
 ### Formato `*.amoxvis`
 Construir una gráfica perfecta—con ejes etiquetados, colores personalizados desde su selector de paletas, rotaciones a 45 grados para encabezados largos, márgenes ajustados y leyendas—toma tiempo. 
 

@@ -114,14 +114,14 @@ const Hero = () => {
         .hero-gradient-orb {
           position: absolute;
           border-radius: 50%;
-          filter: blur(100px);
-          opacity: 0.4;
+          filter: blur(120px);
+          opacity: 0.2;
         }
 
         .hero-orb-1 {
           width: 600px;
           height: 600px;
-          background: radial-gradient(circle, rgba(0, 229, 255, 0.15) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 218, 255, 0.12) 0%, transparent 70%);
           top: -200px;
           right: -100px;
         }
@@ -129,7 +129,7 @@ const Hero = () => {
         .hero-orb-2 {
           width: 500px;
           height: 500px;
-          background: radial-gradient(circle, rgba(0, 255, 135, 0.1) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 212, 155, 0.08) 0%, transparent 70%);
           bottom: -150px;
           left: -100px;
         }
@@ -138,8 +138,8 @@ const Hero = () => {
           position: absolute;
           inset: 0;
           background-image:
-            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
           background-size: 60px 60px;
           mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
           -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
@@ -201,7 +201,7 @@ const Hero = () => {
           height: 3px;
           background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
           border-radius: 2px;
-          opacity: 0.6;
+          opacity: 0.45;
         }
 
         .hero-subtitle {
@@ -266,9 +266,8 @@ const Hero = () => {
           border: 1px solid var(--border-medium);
           overflow: hidden;
           box-shadow:
-            0 25px 60px rgba(0, 0, 0, 0.6),
-            0 0 40px rgba(0, 229, 255, 0.06);
-          animation: floatY 6s ease-in-out infinite;
+            0 25px 60px rgba(0, 0, 0, 0.5),
+            0 0 30px rgba(0, 218, 255, 0.04);
         }
 
         .frame-titlebar {

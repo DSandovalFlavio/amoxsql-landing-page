@@ -2,11 +2,11 @@
 
 ## Introduction
 
-**AmoxSQL** (version 1.1) is a modern, local, high-performance Integrated Development Environment (IDE) for data, built specifically for **DuckDB**. It is designed from its core for data engineers and analysts who require extreme speed, total privacy, and advanced exploratory analysis tools without the latency or costs associated with cloud solutions.
+**AmoxSQL** (version 1.6.0) is a modern, local, and high-performance Data Integrated Development Environment (IDE), built specifically for **DuckDB**. It is designed from its core for data engineers and analysts who require extreme speed, total privacy, and advanced exploratory analysis tools without the latency or costs associated with cloud solutions.
 
-The project takes its name from the Nahuatl word "*Amoxtli*", meaning "book" or "codex". Just as these ancient codices were the sacred repositories of history and astronomical calculations in Mesoamerica, AmoxSQL is conceived as the modern digital codex for the data age. Its emblem, a stylized glyph with a cyan glow, symbolizes structure (the precision of a database schema) interacting with light (the transformation of raw, opaque data into clear, luminous visualizations).
+The project takes its name from the Nahuatl word "*Amoxtli*", which means "book" or "codex". Just as these ancient codices were the sacred repositories of history and astronomical calculations in Mesoamerica, AmoxSQL is conceived as the modern digital codex for the data era. Its emblem, a stylized glyph with a cyan glow, symbolizes structure (the precision of a database schema) interacting with light (the transformation of raw and opaque data into clear and luminous visualizations).
 
-AmoxSQL is not just a SQL editor; it is a complete analytical platform that integrates generative artificial intelligence, hybrid interactive notebooks, and a powerful chart rendering engine, all operating 100% natively and offline under your own machine or local server infrastructure.
+AmoxSQL is not just a SQL editor; it is a complete analytical platform that integrates generative artificial intelligence, hybrid interactive notebooks, and a powerful chart rendering engine, all operating 100% natively and offline under the infrastructure of your own machine or local server.
 
 ---
 
@@ -14,43 +14,47 @@ AmoxSQL is not just a SQL editor; it is a complete analytical platform that inte
 
 The philosophy behind AmoxSQL is "Local First, Maximum Performance". This means your data never leaves your machine unless you explicitly decide so. The main motivations for using AmoxSQL are:
 
-1.  **Strict Privacy:** Healthcare, finance, or government organizations can analyze their data locally without violating international data transfer policies (GDPR, HIPAA, etc.). All processing, from AI inference to Terabyte-scale data aggregation, occurs in local RAM at CPU/Memory speeds.
-2.  **Zero-Latency Analysis:** By using DuckDB, a column-oriented analytical database designed to be embedded (in-process), the cost of serialization and data movement through HTTP requests or TCP/IP sockets disappears. AmoxSQL can scan and import tens of millions of rows in milliseconds.
-3.  **Accelerated Prototyping:** With workflows like Drag & Drop integration and the dynamic chart engine, "Time-to-Insight" is reduced to fractions of the time it would take in bloated corporate BI tools.
+1.  **Strict Privacy:** Healthcare, finance, or government companies can analyze their data locally without violating international data transfer policies (GDPR, HIPAA, etc.). All processing, from Artificial Intelligence inference to aggregating Terabytes of data, occurs in local RAM at CPU/Memory speeds.
+2.  **Zero-Latency Analysis:** By using DuckDB, an analytical column-oriented database designed to be embedded (in-process), the cost of serialization and data movement through HTTP requests or TCP/IP sockets disappears. AmoxSQL can scan and import tens of millions of rows in milliseconds.
+3.  **Accelerated Prototyping:** With workflows like "Drag & Drop" integration and the dynamic chart engine, "Time-to-Insight" is reduced to a fraction of the time it would take in overloaded corporate BI tools.
+4.  **Native Data Engineering:** Through its dedicated modules, such as *DBT Studio* and Execution Chains, it merges the modeling pipeline (local ETL) directly with the analysis of results in a single application.
 
 ---
 
 ## 🏗️ Tech Stack
 
-To guarantee world-class performance, AmoxSQL relies on a hybrid stack of web technologies and system-level software:
+To ensure world-class performance, AmoxSQL relies on a hybrid stack of web technologies and system-level software:
 
 ### Backend (Data Management & Engine)
-*   **Core Interpreter:** Node.js (v20+) acting as the process coordinator and asynchronous I/O manager.
-*   **Logic Server:** Express.js handles intermediate routing and application controllers locally, providing efficient communication APIs with the Frontend.
-*   **Analytical Engine:** DuckDB (via Native Node.js bindings through `@duckdb/node-api`). Queries interact directly with C++ memory hosted by DuckDB, avoiding bottlenecks on JavaScript's Event-Loop side.
+*   **Core Interpreter:** Node.js (v20+) acting as the process coordinator and asynchronous Input/Output (I/O) manager.
+*   **Logical Server:** Express.js handles intermediate routing and local application controllers, providing efficient communication APIs with the Frontend.
+*   **Analytical Engine:** DuckDB (through Native Node.js bindings via `@duckdb/node-api`). Queries interact directly with the C++ memory hosted by DuckDB, avoiding bottlenecks on the JavaScript Event-Loop side.
 
 ### Frontend (User Interface & Visualization)
-*   **UI Rendering:** React and Vite ensure extremely fast HTML DOM hydration and reactive management of the IDE's complex states and multi-tab workflow.
-*   **Editing Engine:** Monaco Editor (the underlying engine behind Microsoft's renowned Visual Studio Code). Delivers rich IDE capabilities like DuckDB SQL syntactic auto-completion, conditional variable highlighting, and multiple cursors.
-*   **Scientific Visualization:** Recharts. A D3-adapted visual composition library for React's lifecycle that facilitates dynamic interactions in high-density vector charts.
-*   **Styling & Themes:** A proprietary, rigid Light/Dark Mode design system injected at the global CSS variables level, achieving a perfect theme state change with zero latency.
+*   **UI Rendering:** React and Vite ensure extremely fast DOM hydration and reactive management of complex IDE states and multi-tab workflows.
+*   **Editing Engine:** Monaco Editor (the underlying engine behind Microsoft's famous Visual Studio Code). Delivers rich IDE capabilities like DuckDB SQL syntax auto-completion, conditional variable highlighting, and multi-cursors.
+*   **Scientific Visualization:** Recharts. A D3-based visual composition library adapted for the React lifecycle that facilitates dynamic interactions on high-density vector charts.
+*   **Styling & Themes:** A custom and strict Light/Dark Mode design system injected at the global CSS variable level, achieving a perfect, latency-free theme state switch.
 
 ### Embedded Systems & Connectivity
-*   **Local AI Engine:** Direct integration with the standard **Ollama** ecosystem APIs via local REST protocols.
+*   **Local AI Engine:** Direct integration with the standard APIs of the **Ollama** ecosystem via local REST protocols.
 *   **Language Models (LLMs):** Tested compatibility with Qwen 2.5, Llama 3.1, and 3.2.
-*   **Cloud Integration:** Optional managed access to Google Generative AI (Gemini Flash & Pro) through the official `GoogleGenerativeAI` library.
+*   **Cloud Integration:** Optional managed access to Google Generative AI (Gemini Flash & Pro) via the official `GoogleGenerativeAI` library.
 
 ---
 
-## 📂 Documentation Categories
+## 📂 Documentation Categories Organization
 
-The detailed technical user manuals for AmoxSQL are divided into the following six categories. Each explains, at a granular developer and end-user level, how its subsystems work:
+AmoxSQL's detailed technical manuals are divided into the following nine categories. Each explains the operation of its subsystems at a granular level for developers and end users:
 
-1.  **Core Workflow & Architecture:** Explains the project-centric philosophy, the native connection management engine, and the multi-tab system architecture with split views.
-2.  **Database Management & Inspection:** Details how AmoxSQL dynamically inspects schemas, handles RAM vs Disk Persistence connections, and the strict Data Warehouse-style Table Inspector.
-3.  **SQL Editing & Notebooks:** An intensive analysis of Monaco Editor capabilities, the proprietary `.sqlnb` extension design, and the presentation format for exporting interactive PDF Reports.
-4.  **Dynamic Data Visualization:** A technical deep-dive into the Recharts rendering engine, persistent `.amoxvis` configurations, algorithmic axis manipulations, statistical reference indicators, and scaled exports.
-5.  **Integrated Artificial Intelligence (AmoxSQL AI):** Architecture and security of the local/cloud model. Detailed review of the algorithmic construction and dynamic schema parsing for the "System Prompt", as well as asynchronous network integration for Ollama and Google Gemini.
-6.  **Advanced Debugging Tools & IO:** Detailed instructions on the progressive Common Table Expressions (CTE) debugger, the visual execution plan tracing engine (`Query Execution Plan`) built on asynchronous Elkjs layout, and bulk import/export channels.
+1.  **Core Architecture & Workflow:** Explains the project-centric philosophy, the advanced `Command Palette`, the native connection management engine, and the multi-tab system and visual persistence architecture.
+2.  **Database Management & Inspection:** Details how AmoxSQL dynamically inspects schemas, explores DuckDB Extensions, and evaluates structural differences (`Schema Diff`).
+3.  **SQL Editing & Notebooks:** Analysis of the highly customizable Monaco Editor capabilities, Auto-Snippets, conditional variables, search history, and `.sqlnb` extension.
+4.  **Dynamic Data Visualization & IO:** Technical deep dive into the iterative rendering engine, groupings (pivots), indicators, and PNG export.
+5.  **Integrated Artificial Intelligence (AmoxSQL AI):** Architecture and security of the local model via Ollama and Gemini.
+6.  **Advanced Debugging Tools & IO:** Automatic Data Quality Evaluators (`QA checks`), `Step-through Debuggers` for CTEs, and the powerful multi-format bulk import I/O pipeline.
+7.  **DBT Studio:** **[NEW]** Comprehensive documentation of the visual environment to orchestrate local Python models and `dbt-core` profiles without leaving the IDE.
+8.  **Data Engineering:** **[NEW]** Sequential ETL processes via Execution Chains.
+9.  **IDE Configuration:** **[NEW]** Guide to the unified parametric settings panel that gives visual color and shape to the software.
 
-To leverage AmoxSQL to its full potential, it is recommended to read each of the sections linked to these categories in depth.
+To leverage AmoxSQL to its fullest potential, it is highly recommended to read in-depth each of the sections linked to these categories.

@@ -51,7 +51,7 @@ const OriginStory = () => {
           background: linear-gradient(
             180deg, 
             var(--bg-base) 0%, 
-            rgba(20, 12, 0, 0.2) 50%, 
+            rgba(18, 12, 6, 0.15) 50%, 
             var(--bg-base) 100%
           );
         }
@@ -84,8 +84,7 @@ const OriginStory = () => {
           height: 260px;
           position: relative;
           z-index: 1;
-          filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.3));
-          animation: floatY 5s ease-in-out infinite;
+          filter: drop-shadow(0 0 15px rgba(0, 218, 255, 0.15));
         }
 
         .origin-glow {
@@ -94,11 +93,11 @@ const OriginStory = () => {
           border-radius: 50%;
           background: radial-gradient(
             circle, 
-            rgba(0, 229, 255, 0.15) 0%, 
-            rgba(0, 85, 255, 0.06) 35%, 
+            rgba(0, 218, 255, 0.08) 0%, 
+            rgba(0, 85, 255, 0.03) 35%, 
             transparent 65%
           );
-          animation: glowPulse 4s ease-in-out infinite;
+          animation: glowPulse 5s ease-in-out infinite;
           z-index: 0;
         }
 
@@ -118,7 +117,7 @@ const OriginStory = () => {
         .origin-quote {
           border-left: 3px solid var(--accent-amber);
           padding: 1.25rem 1.5rem;
-          background: rgba(255, 179, 0, 0.04);
+          background: rgba(242, 153, 74, 0.03);
           border-radius: 0 var(--radius-md) var(--radius-md) 0;
           margin: 0.5rem 0;
         }

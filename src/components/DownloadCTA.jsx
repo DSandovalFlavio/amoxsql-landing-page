@@ -85,7 +85,7 @@ const DownloadCTA = () => {
         .cta-orb-1 {
           width: 500px;
           height: 500px;
-          background: radial-gradient(circle, rgba(0, 255, 135, 0.12) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 212, 155, 0.08) 0%, transparent 70%);
           top: -200px;
           left: 50%;
           transform: translateX(-50%);
@@ -94,7 +94,7 @@ const DownloadCTA = () => {
         .cta-orb-2 {
           width: 400px;
           height: 400px;
-          background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(0, 218, 255, 0.06) 0%, transparent 70%);
           bottom: -200px;
           right: 10%;
         }
@@ -147,10 +147,10 @@ const DownloadCTA = () => {
         }
 
         .btn-sponsor:hover {
-          border-color: rgba(219, 39, 119, 0.8);
-          background: rgba(219, 39, 119, 0.18);
+          border-color: rgba(219, 39, 119, 0.6);
+          background: rgba(219, 39, 119, 0.14);
           color: #f9a8d4;
-          box-shadow: 0 0 25px rgba(219, 39, 119, 0.2);
+          box-shadow: 0 4px 20px rgba(219, 39, 119, 0.12);
           transform: translateY(-2px);
         }
 

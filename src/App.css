@@ -8,7 +8,7 @@
   left: 0;
   right: 0;
   height: 68px;
-  background: rgba(5, 5, 5, 0.75);
+  background: rgba(10, 10, 15, 0.82);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
@@ -94,8 +94,8 @@
 
 .lang-switcher:hover {
   color: var(--accent-cyan);
-  border-color: rgba(0, 229, 255, 0.4);
-  background: rgba(0, 229, 255, 0.06);
+  border-color: rgba(0, 218, 255, 0.3);
+  background: rgba(0, 218, 255, 0.05);
 }
 
 .nav-sponsor-btn {
@@ -115,10 +115,10 @@
 }
 
 .nav-sponsor-btn:hover {
-  border-color: rgba(219, 39, 119, 0.7);
-  background: rgba(219, 39, 119, 0.15);
+  border-color: rgba(219, 39, 119, 0.55);
+  background: rgba(219, 39, 119, 0.12);
   color: #f9a8d4;
-  box-shadow: 0 0 16px rgba(219, 39, 119, 0.2);
+  box-shadow: 0 0 12px rgba(219, 39, 119, 0.12);
 }
 
 /* Main content offset for fixed navbar */

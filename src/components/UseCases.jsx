@@ -68,14 +68,14 @@ const UseCases = () => {
         }
 
         .uc-icon-green {
-          background: rgba(0, 255, 135, 0.08);
-          border: 1px solid rgba(0, 255, 135, 0.2);
+          background: rgba(0, 212, 155, 0.06);
+          border: 1px solid rgba(0, 212, 155, 0.16);
           color: var(--accent-green);
         }
 
         .uc-icon-cyan {
-          background: rgba(0, 229, 255, 0.08);
-          border: 1px solid rgba(0, 229, 255, 0.2);
+          background: rgba(0, 218, 255, 0.06);
+          border: 1px solid rgba(0, 218, 255, 0.16);
           color: var(--accent-cyan);
         }
 

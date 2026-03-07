@@ -15,6 +15,7 @@ El explorador organiza la base de datos en una jerarquía clásica:
 3.  **Tablas y Vistas:** Se listan alfabéticamente. Cada elemento viene acompañado de dos íconos de interacción rápida incrustados:
     *   **Drag & Drop (Arrastrar y Soltar):** Los usuarios pueden arrastrar el nombre de la tabla directamente al lienzo del `SqlEditor`. El frontend de React intercepta el evento "OnDrop" y transpila dinámicamente el identificador a un formato SQL seguro (ej. `"main"."mis_ventas"`). También se pueden expandir las tablas y arrastrar columnas específicas.
     *   **Quick Preview (Lupa):** Presenta una ventana modal súper ligera que ejecuta un `SELECT * FROM tabla LIMIT 50`. Es útil para validar rápidamente la forma de los datos sin afectar la sesión de edición principal.
+4. **Extension Explorer (`ExtensionExplorer.jsx`):** Embebido como un sub-módulo accesible en la navegación, es una tienda visual (*Marketplace* simulado) que enumera paquetes y conectores remotos (`spatial`, `httpfs`, `aws`). Con un solo clic se dispara el script `INSTALL x; LOAD x;` para dotar a DuckDB de poderes como parseo geoespacial, sin salir nunca de la UI de React.
 
 ## 2. El Inspector Profundo (`TableDetailsModal.jsx`)
 
@@ -42,10 +43,26 @@ Accede a la tabla interna del sistema de metadatos para reverse-ingeniar y mostr
 
 ---
 
-## 3. Buscador Global y Tabla de Resultados (`ResultsTable.jsx`)
+## 3. Comparativa de Esquemas Computacional (`SchemaDiffModal.jsx`)
+
+En los escenarios donde un ingeniero de datos refactoriza modelos DBT constantemente, surge la duda: *"¿Qué columnas agregué o borré en este iteración frente a la anterior?"*
+AmoxSQL introduce una potente comparativa estructural de esquemas:
+*   Se seleccionan dos tablas ("Origen" vs "Destino").
+*   El React State mapea en paralelo el resultado asíncrono cruzando conjuntos de ambos metadatos por `Full Outer Join` inverso.
+*   Pinta de verde las **Adiciones (`+ column`)**, de rojo vivo las **Supresiones (`- target`)**, y de advertencia naranja los **Cambios de Tipado (ej. `VARCHAR -> INT`)**.
+
+---
+
+## 4. Buscador Global y Tabla de Resultados (`ResultsTable.jsx`)
 
 Una vez que un script es ejecutado y los datos retornan del backend en formato JSON estructurado, son ingeridos por el `ResultsTable`.
 
 *   **Renderizado Robusto:** Al no usar DOM repetitivo (soportes tipo virtual-scrolling en listas masivas), AmoxSQL puede inyectar decenas de miles de celdas procedentes de un `SELECT *` gigante sin congelar o colapsar el hilo principal de React/Electron.
+*   **Tipado de Datos Nativo:** (Añadido en v1.7.0) El backend intercepta de forma segura el objeto iterador de Node (Reader) para extraer los data-types reales (`VARCHAR`, `DECIMAL(3,2)`, `INTEGER`) y los renderiza automáticamente en la interfaz como subtítulos semitransparentes bajo cada columna.
+*   **Redimensionamiento Libre de Columnas:** Las cabeceras de la grilla de resultados ahora cuentan con "handles" (tiradores invisibles) en sus bordes derechos permitiendo a los usuarios expandir o colapsar las celdas arbitrariamente para poder leer JSONs monstruosos o truncar textos inútiles visualmente.
 *   **Buscador en Memoria:** Posee una barra de búsqueda global. Si un usuario tiene 10,000 resultados en el lado del cliente, buscar una palabra filtra instantáneamente sobre toda la matriz sin re-enviar la consulta a DuckDB, funcionando puramente en `Array.filter` sobre arreglos de JavaScript optimizados.
 *   **Ordenamientos Cíclicos:** Los encabezados de las columnas son interactivos, permitiendo ordenar ascendente, descendente o retornar al estado natural extraído del origen, actuando como un manipulador secundario al `ORDER BY`.
+## 5. El Concepto Funcional "Save To Database" (`SaveToDbModal.jsx`)
+
+Al ejecutar un complejo Query (Ej. `SELECT * FROM a JOIN b JOIN c GROUP BY fecha`), si la matriz es satisfactoria, el usuario puede convertir cualquier consulta cargada en Editor a una nueva Tabla Física (CTAS - *Create Table as Select*) o bien materializar el resultado a una Vista Virtual (*Create View*). 
+Esto es especialmente productivo cuando no se desea exportar a CSV, sino que urge encapsular el conjunto resultante para re-uso analítico dentro de otro Query en el propio DuckDB perenne del entorno.

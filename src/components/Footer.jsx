@@ -71,7 +71,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p className="footer-copyright">
-            {t('footer.createdWith')} <Heart size={14} style={{ color: '#00e5ff', verticalAlign: 'middle' }} /> {t('footer.by')}{' '}
+            {t('footer.createdWith')} <Heart size={14} style={{ color: '#00DAFF', verticalAlign: 'middle' }} /> {t('footer.by')}{' '}
             <a href="https://github.com/dsandovalflavio" target="_blank" rel="noopener noreferrer" className="footer-author">
               @dsandovalflavio
             </a>

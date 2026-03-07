@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ═══════════════════════════════════════════════
-   AmoxSQL Design System — Inspired by Linear/Supabase/Warp
+   AmoxSQL Design System — Linear UI Style
    ═══════════════════════════════════════════════ */
 
 :root {
@@ -9,43 +9,43 @@
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-  /* Core Palette */
-  --bg-base: #050505;
-  --bg-elevated: #0a0a0a;
-  --bg-surface: #111111;
-  --bg-surface-hover: #1a1a1a;
-  --bg-overlay: rgba(10, 10, 10, 0.85);
+  /* Core Palette — subtle blue undertone */
+  --bg-base: #0a0a0f;
+  --bg-elevated: #12121a;
+  --bg-surface: #1a1a24;
+  --bg-surface-hover: #222230;
+  --bg-overlay: rgba(10, 10, 15, 0.88);
 
-  --text-primary: #f5f5f5;
-  --text-secondary: #a1a1aa;
-  --text-muted: #52525b;
-  --text-faint: #3f3f46;
+  --text-primary: #ededf0;
+  --text-secondary: #8e8e9a;
+  --text-muted: #5c5c6e;
+  --text-faint: #3f3f4e;
 
-  /* Accent Colors */
-  --accent-cyan: #00e5ff;
-  --accent-green: #00ff87;
-  --accent-amber: #ffb300;
-  --accent-purple: #a78bfa;
+  /* Accent Colors — refined, non-neon */
+  --accent-cyan: #00DAFF;
+  --accent-green: #00d49b;
+  --accent-amber: #f2994a;
+  --accent-purple: #8b5df0;
 
-  /* Glow variants */
-  --glow-cyan: rgba(0, 229, 255, 0.35);
-  --glow-green: rgba(0, 255, 135, 0.35);
-  --glow-amber: rgba(255, 179, 0, 0.25);
-  --glow-purple: rgba(167, 139, 250, 0.25);
+  /* Glow variants — much subtler */
+  --glow-cyan: rgba(0, 218, 255, 0.12);
+  --glow-green: rgba(0, 212, 155, 0.12);
+  --glow-amber: rgba(242, 153, 74, 0.10);
+  --glow-purple: rgba(139, 93, 240, 0.10);
 
   /* Subtle variants for backgrounds */
-  --cyan-subtle: rgba(0, 229, 255, 0.08);
-  --green-subtle: rgba(0, 255, 135, 0.08);
-  --amber-subtle: rgba(255, 179, 0, 0.06);
+  --cyan-subtle: rgba(0, 218, 255, 0.06);
+  --green-subtle: rgba(0, 212, 155, 0.06);
+  --amber-subtle: rgba(242, 153, 74, 0.05);
 
-  /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-medium: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.2);
+  /* Borders — softer */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.16);
 
   /* Surfaces */
-  --surface-glass: rgba(20, 20, 20, 0.6);
-  --surface-card: rgba(15, 15, 15, 0.8);
+  --surface-glass: rgba(18, 18, 26, 0.65);
+  --surface-card: rgba(16, 16, 22, 0.8);
 
   /* Sizing */
   --container-max: 1200px;
@@ -141,12 +141,10 @@ h3 {
 
 .accent-text-cyan {
   color: var(--accent-cyan);
-  text-shadow: 0 0 20px var(--glow-cyan);
 }
 
 .accent-text-green {
   color: var(--accent-green);
-  text-shadow: 0 0 20px var(--glow-green);
 }
 
 .accent-cyan {
@@ -158,14 +156,14 @@ h3 {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-green) 100%);
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-green) 80%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-warm {
-  background: linear-gradient(135deg, var(--accent-amber) 0%, #ff6b35 100%);
+  background: linear-gradient(135deg, var(--accent-amber) 0%, #e06030 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -233,18 +231,18 @@ h3 {
 
 .card:hover {
   border-color: var(--border-medium);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
 .glow-border-cyan {
-  border: 1px solid rgba(0, 229, 255, 0.3);
-  box-shadow: 0 0 20px rgba(0, 229, 255, 0.08), inset 0 0 20px rgba(0, 229, 255, 0.03);
+  border: 1px solid rgba(0, 218, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 218, 255, 0.05);
 }
 
 .glow-border-green {
-  border: 1px solid rgba(0, 255, 135, 0.3);
-  box-shadow: 0 0 20px rgba(0, 255, 135, 0.08), inset 0 0 20px rgba(0, 255, 135, 0.03);
+  border: 1px solid rgba(0, 212, 155, 0.2);
+  box-shadow: 0 0 15px rgba(0, 212, 155, 0.05);
 }
 
 /* ═══════════════════════════════════════════════
@@ -315,14 +313,14 @@ h3 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-green) 0%, #00cc6a 100%);
-  color: #000000;
-  box-shadow: 0 0 30px rgba(0, 255, 135, 0.2);
+  background: linear-gradient(135deg, var(--accent-green) 0%, #00b080 100%);
+  color: #0a0a0f;
+  box-shadow: 0 4px 20px rgba(0, 212, 155, 0.15);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 50px rgba(0, 255, 135, 0.35);
+  box-shadow: 0 8px 30px rgba(0, 212, 155, 0.25);
 }
 
 .btn-outline {
@@ -337,9 +335,9 @@ h3 {
 }
 
 .btn-glowing {
-  background: rgba(0, 0, 0, 0.6);
-  color: #ffffff;
-  border: 1px solid rgba(0, 255, 135, 0.35);
+  background: rgba(10, 10, 15, 0.7);
+  color: #ededf0;
+  border: 1px solid rgba(0, 212, 155, 0.25);
   padding: 1rem 2.5rem;
   border-radius: var(--radius-md);
   font-size: 1rem;
@@ -347,12 +345,12 @@ h3 {
   font-family: var(--font-sans);
   cursor: pointer;
   transition: all var(--transition-base);
-  box-shadow: 0 0 30px rgba(0, 255, 135, 0.12), inset 0 0 20px rgba(0, 255, 135, 0.04);
+  box-shadow: 0 4px 20px rgba(0, 212, 155, 0.08);
 }
 
 .btn-glowing:hover {
-  border-color: rgba(0, 255, 135, 0.7);
-  box-shadow: 0 0 50px rgba(0, 255, 135, 0.25), inset 0 0 30px rgba(0, 255, 135, 0.08);
+  border-color: rgba(0, 212, 155, 0.45);
+  box-shadow: 0 8px 30px rgba(0, 212, 155, 0.15);
   transform: translateY(-2px);
 }
 
@@ -398,11 +396,11 @@ h3 {
 
   0%,
   100% {
-    box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+    box-shadow: 0 0 12px rgba(0, 218, 255, 0.08);
   }
 
   50% {
-    box-shadow: 0 0 40px rgba(0, 229, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 218, 255, 0.14);
   }
 }
 
@@ -554,7 +552,7 @@ h3 {
   border-left: 4px solid var(--accent-green);
   padding: 1rem 1.5rem;
   margin: 1.5rem 0;
-  background: rgba(0, 255, 128, 0.04);
+  background: rgba(0, 212, 155, 0.03);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 

@@ -2,7 +2,7 @@
 
 ## Introducción
 
-**AmoxSQL** (versión 1.1) es un Entorno de Desarrollo Integrado (IDE) de datos moderno, local y de alto rendimiento, construido específicamente para **DuckDB**. Está diseñado desde su núcleo para ingenieros de datos y analistas que requieren velocidad extrema, privacidad total y herramientas avanzadas de análisis exploratorio sin la latencia ni los costos asociados a las soluciones en la nube.
+**AmoxSQL** (versión 1.6.0) es un Entorno de Desarrollo Integrado (IDE) de datos moderno, local y de alto rendimiento, construido específicamente para **DuckDB**. Está diseñado desde su núcleo para ingenieros de datos y analistas que requieren velocidad extrema, privacidad total y herramientas avanzadas de análisis exploratorio sin la latencia ni los costos asociados a las soluciones en la nube.
 
 El proyecto toma su nombre de la palabra náhuatl "*Amoxtli*", que significa "libro" o "códice". De la misma manera en que estos códices antiguos eran los depositarios sagrados de la historia y los cálculos astronómicos en Mesoamérica, AmoxSQL se concibe como el códice digital moderno para la era de los datos. Su emblema, un glifo estilizado con un resplandor cian, simboliza la estructura (la precisión de un esquema de base de datos) interactuando con la luz (la transformación de datos crudos y opacos en visualizaciones claras y luminosas).
 
@@ -17,6 +17,7 @@ La filosofía detrás de AmoxSQL es "Lo Local Primero, Rendimiento Máximo". Est
 1.  **Privacidad Estricta:** Las empresas de salud, finanzas o gubernamentales pueden analizar sus datos localmente sin violar políticas de transferencia de datos internacionales (GDPR, HIPAA, etc.). Todo el procesamiento, desde la inferencia de Inteligencia Artificial hasta la agregación de Terabytes de datos, ocurre en memoria RAM local a velocidades de CPU/Memoria.
 2.  **Zero-Latency Analysis (Análisis sin latencia):** Al utilizar DuckDB, una base de datos analítica orientada a columnas diseñada para ser incrustada (in-process), el costo de la serialización y el movimiento de datos a través de peticiones HTTP o sockets TCP/IP desaparece. AmoxSQL puede escanear e importar decenas de millones de filas en milisegundos.
 3.  **Prototipado Acelerado:** Con flujos como la integración "Drag & Drop" (Arrastrar y soltar) y el motor dinámico de gráficos, el "Time-to-Insight" se reduce a fracciones del tiempo que tomaría en herramientas de BI corporativas sobrecargadas.
+4.  **Ingeniería de Datos Nativa:** A través de sus módulos dedicados, como *DBT Studio* y cadenas de ejecución (Execution Chains), fusiona el pipeline de modelado (ETL local) directo con el análisis de los resultados en una sola aplicación.
 
 ---
 
@@ -44,13 +45,16 @@ Para garantizar un rendimiento de clase mundial, AmoxSQL se apoya en una pila h�
 
 ## 📂 Organización de las Categorías de Documentación
 
-Los manuales de uso técnico detallados de AmoxSQL están divididos en las siguientes seis categorías. Cada una explica, de manera granular a nivel de desarrollador y usuario final, el funcionamiento de sus subsistemas:
+Los manuales de uso técnico detallados de AmoxSQL están divididos en las siguientes nueve categorías. Cada una explica, de manera granular a nivel de desarrollador y usuario final, el funcionamiento de sus subsistemas:
 
-1.  **Arquitectura Central y Flujo de Trabajo (Core Workflow & Architecture):** Explica la filosofía centrada en proyectos, el motor de gestión de conexiones nativas y la arquitectura del sistema multi-tab y vistas divididas.
-2.  **Gestor y Explorador de Base de Datos (Database Management & Inspection):** Detalla cómo AmoxSQL inspecciona esquemas dinámicamente, maneja las conexiones RAM vs Persistencia de Disco, y detalla el funcionamiento estricto del Inspector de Tablas similar a Data Warehouse.
-3.  **Cuadernos y Edición SQL (SQL Editing & Notebooks):** Un análisis intensivo de las capacidades del Monaco Editor, el diseño de la extensión propietaria `.sqlnb` y el formato de presentación para exportar Reportes PDF interactivos.
-4.  **Visualización de Datos Dinámica (Data Visualization & IO):** Una inmersión técnica en el motor de renderizado de Recharts, las configuraciones persistentes `.amoxvis`, manipulaciones de ejes algorítmicas, indicadores estadísticos de referencia y exportación escalada.
-5.  **Inteligencia Artificial Integrada (AmoxSQL AI):** Arquitectura y seguridad del modelo local/nube. Se revisa a detalle la construcción algorítmica y el parsing de esquemas dinámicos para el "System Prompt", así como la integración asíncrona de red para Ollama y Gemini de Google.
-6.  **Herramientas Avanzadas y Depuración (Advanced Debugging Tools & IO):** Instrucciones minuciosas sobre el depurador progresivo de *Common Table Expressions* (CTE), el motor de trazado de ejecución de planes visual (`Query Execution Plan`) construido sobre el layout asíncrono Elkjs, y los canales de importación/exportación masivos.
+1.  **Arquitectura Central y Flujo de Trabajo (Core Workflow & Architecture):** Explica la filosofía centrada en proyectos, el gestor avanzado de comandos (`Command Palette`), el motor de gestión de conexiones nativas y la arquitectura del sistema multi-tab y persistencia visual.
+2.  **Gestor y Explorador de Base de Datos (Database Management & Inspection):** Detalla cómo AmoxSQL inspecciona esquemas dinámicamente, explora las Extensiones de DuckDB, y evalúa diferencias entre estructuras (`Schema Diff`).
+3.  **Cuadernos y Edición SQL (SQL Editing & Notebooks):** Análisis de las capacidades del Monaco Editor hiper-personalizable, fragmentos automáticos (Snippets), variables condicionales, historial de búsquedas y extensión `.sqlnb`.
+4.  **Visualización de Datos Dinámica (Data Visualization & IO):** Inmersión técnica en el motor de renderizado iterativo, agrupaciones (pivots), indicadores y exportación a PNG.
+5.  **Inteligencia Artificial Integrada (AmoxSQL AI):** Arquitectura y seguridad del modelo local vía Ollama y Gemini.
+6.  **Herramientas Avanzadas y Depuración (Advanced Debugging Tools & IO):** Evaluadores de Calidad de Datros automáticos (`QA checks`), depuradores de CTEs (`Step-through Debuggers`), y el potente pipeline multi-formato de I/O de importación masiva.
+7.  **Estudio DBT (DBT Studio):** **[NUEVO]** Documentación integral del ambiente visual para orquestar modelos locales de Python y perfiles de `dbt-core` sin abandonar el IDE.
+8.  **Ingeniería de Datos (Data Engineering):** **[NUEVO]** Procesos secuenciales de ETL vía las Cadenas de Ejecución (Execution Chains).
+9.  **Configuración del IDE (IDE Configuration):** **[NUEVO]** Guía del panel unificado de ajustes paramétricos que da color y forma visual al software.
 
-Para aprovechar AmoxSQL en su mayor potencial, se recomienda leer a profundidad cada una de las secciones vinculados a estas categorías.
+Para aprovechar AmoxSQL en su mayor potencial, se recomienda leer a profundidad cada una de las secciones vinculadas a estas categorías.

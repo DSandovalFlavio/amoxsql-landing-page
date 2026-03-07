@@ -125,7 +125,7 @@ const AiSection = () => {
 
       <style>{`
         .ai-section {
-          background: linear-gradient(180deg, var(--bg-base) 0%, rgba(0, 15, 10, 0.3) 50%, var(--bg-base) 100%);
+          background: linear-gradient(180deg, var(--bg-base) 0%, rgba(10, 15, 20, 0.25) 50%, var(--bg-base) 100%);
         }
 
         .ai-grid {
@@ -148,8 +148,8 @@ const AiSection = () => {
 
         .ai-card:hover {
           border-color: var(--border-medium);
-          transform: translateY(-3px);
-          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+          transform: translateY(-2px);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
         }
 
         .ai-card-header {
@@ -169,14 +169,14 @@ const AiSection = () => {
         }
 
         .ai-icon-local {
-          background: rgba(0, 255, 135, 0.1);
-          border: 1px solid rgba(0, 255, 135, 0.2);
+          background: rgba(0, 212, 155, 0.08);
+          border: 1px solid rgba(0, 212, 155, 0.16);
           color: var(--accent-green);
         }
 
         .ai-icon-cloud {
-          background: rgba(0, 229, 255, 0.1);
-          border: 1px solid rgba(0, 229, 255, 0.2);
+          background: rgba(0, 218, 255, 0.08);
+          border: 1px solid rgba(0, 218, 255, 0.16);
           color: var(--accent-cyan);
         }
 

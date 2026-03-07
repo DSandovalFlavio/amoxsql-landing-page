@@ -23,6 +23,11 @@ Entender qué nodos subyacentes son los responsables del "cuello de botella" com
 *   En el componente `QueryPlanViewer.jsx`, el IDE no pinta la sosa línea de terminal habitual. Toma el JSON y lo envía al layout engine hiper-rápido de matemáticas topográficas **Elkjs** (Eclipse Layout Kernel) asincrónicamente para calcular posiciones XY nodales. 
 *   Pinta los bloques de código como "Tarjetas" jerárquicas vinculadas por SVG Curvas, pintando con alertas rojas (`warning/red hue`) automáticas aquellos elementos con una "Afinidad de Costo" o carga porcentual muy alta comparado con sus vecinos paralelos, lo que resulta sumamente obvio revelar bloqueantes de tabla como escaneos "Sequential Scans" vs "Index Seek".
 
+### Suite de Calidad y Perfilado (`DataQualityModal.jsx`, `DataProfiler.jsx`)
+Antes de construir modelos de agregación sobre tablas inexploradas, es vital auditar la pulcritud de la columna. El nuevo evaluador automático de AmoxSQL orquesta esto sin escribir código:
+1.  **Detección de Tipos y Distribución:** La interfaz ejecuta una cascada de sub-consultas estadísticas matemáticas en segundo plano que le revela al ingeniero los conteos de `Nulls`, la Cardinalidad (elementos únicos vs totales) y los baselines de Min/Max.
+2.  **Reporte Automatizado de Nulos, Duplicados y Outliers:** Mediante el `DataQualityModal`, los usuarios presionan un botón que inspecciona cada columna del Dataset buscando desviaciones estándar agresivas (matemática de cuantiles), inconsistencias de tipos silenciosos y registros repetidos, entregando un reporte visual calificado para aprobar o rechazar fuentes de datos ingestas.
+
 ---
 
 ## 2. Ingesta y Exportación Multi-formato (Input/Output Management)
@@ -31,10 +36,11 @@ Para que un entorno de análisis local tenga valía de producción global real, 
 
 ### Importaciones Masivas e Inteligentes
 Utilizando Modales Inteligentes de Importación, el IDE puede absorber y transformar orígenes de datos locales hacia las tablas físicas o volátiles `.db` y en base a la robustez inigualable de DuckDB:
-*   **A nivel de Archivo Único:** Carga masiva de extensiones `.CSV`, `.Parquet` y `.JSON`. Soporte robusto de `.XLSX` (Excel ExcelSheets Legacy) mediante un módulo de puente import-modal con parseo en el cliente vía buffers hexadecimales (`XLSX/SheetJS` integration), superando las limitantes que otras bases tienen para ingerir hojas calculadas propietarias de Microsoft.
+*   **A nivel de Archivo Único:** Carga masiva de extensiones `.CSV`, `.Parquet` y `.JSON`. Soporte estricto y dedicado de **Microsoft Excel (.XLSX y .XLS)** mediante un módulo puente especializado (`ImportExcelModal.jsx`), el cual carga múltiples hojas nativas en memoria JavaScript (vía librerías `xlsx`) antes de vectorizarlas a la base de datos DuckDB asíncronamente; superando las limitantes que otras bases monolíticas tienen para ingerir hojas calculadas corporativas nativamente.
 *   **A Nivel Carpeta (Mass Import):** Para data ingestions de Data Lakes temporales, puedes seleccionar un fólder rígido de Windows y el IDE redacta un macro automático asíncrono sobre promesas NodeJS que crea Tablas y anexa todos los parquets uniformados dentro en milisegundos usando el comando comodín de DuckDB (`read_parquet('folder/*.parquet')`).
-*   **Limpieza de Metadato Entrante (Slugify Headers):** Es muy común recibir columnas corporativas ruidosas "Ventas Históricas 2023!!". Durante la ventana de validación de amox, AmoxSQL detecta tales anomalías de tipado y ofrece un Toggle para purificar e inyectar *Snake Case* a salvo de caracteres especiales ("`ventas_historicas_2023`") automáticamente antes de solidificarlas en Base de Datos.
+*   **Limpieza de Metadato Entrante (Slugify Headers):** Es muy común recibir columnas corporativas ruidosas "Ventas Históricas 2023!!". Durante la ventana de validación de importación, AmoxSQL detecta tales anomalías de tipado y ofrece un Toggle para purificar e inyectar *Snake Case* limpio a salvo de caracteres especiales ("`ventas_historicas_2023`") automáticamente antes de solidificarlas en Base de Datos.
 
 ### Output en Archivo (Exportaciones de Sesión)
 Una vez resuelto el cálculo transaccional local in-memory:
-El módulo de `ResultsTable.jsx` permite capturar los bytes de objetos JSON presentados, transpilar de regreso y serializar en Strings CSV (`react-csv` style blob object URLs), desatando una descarga limpia controlada hacia el sistema del usuario con click, evadiendo conversiones costosas manuales de formato y ofreciendo los datos listos para consumir por una tercera entidad, auditoría externa, o re-empaquetado para sistemas CRM finales.
+El módulo nativo `ExportDataModal.jsx` permite capturar los dominios de los Queries ejecutados y delegar desde el Frontend hacia el motor DuckDB (Server) la orden expresa de `COPY TO 'ruta/output'`. 
+Dicho sistema soporta descarga limpia y de alta performance en los siguientes formatos nativos de exportación analítica: **CSV (Texto Separado)**, **JSON estructurado**, **Parquet Columnar** para Big Data, y sorprendentemente ahora permite transcribir de vuelta conjuntos gigantes a **Excel (XLSX)**, ofreciendo los datos listos para consumir por entes de auditoría contable o terceras capas de software que exijan planillas tradicionales.
