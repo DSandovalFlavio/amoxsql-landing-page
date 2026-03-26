@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import DocViewer from './DocViewer';
-import { FileText, Database, Share2, Eye, Bot, Code, Bug } from 'lucide-react';
+import { FileText, Database, Share2, Eye, Bot, Code, Bug, Workflow, GitBranch, Settings } from 'lucide-react';
 import { useTranslation } from '../i18n';
 
 const docsNavigation = [
@@ -12,6 +12,9 @@ const docsNavigation = [
   { path: 'data-vis', titleKey: 'data-vis', file: '4_data_visualization.md', icon: <Eye size={16} /> },
   { path: 'ai-integration', titleKey: 'ai-integration', file: '5_ai_integration.md', icon: <Bot size={16} /> },
   { path: 'debugging', titleKey: 'debugging', file: '6_debugging_io.md', icon: <Bug size={16} /> },
+  { path: 'dbt-studio', titleKey: 'dbt-studio', file: '7_dbt_studio.md', icon: <Workflow size={16} /> },
+  { path: 'data-engineering', titleKey: 'data-engineering', file: '8_data_engineering.md', icon: <GitBranch size={16} /> },
+  { path: 'ide-configuration', titleKey: 'ide-configuration', file: '9_ide_configuration.md', icon: <Settings size={16} /> },
 ];
 
 const DocsLayout = () => {

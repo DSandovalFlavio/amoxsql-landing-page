@@ -10,15 +10,15 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Core Palette — subtle blue undertone */
-  --bg-base: #0a0a0f;
-  --bg-elevated: #12121a;
-  --bg-surface: #1a1a24;
-  --bg-surface-hover: #222230;
-  --bg-overlay: rgba(10, 10, 15, 0.88);
+  --bg-base: #000000;
+  --bg-elevated: #0a0a0a;
+  --bg-surface: #111111;
+  --bg-surface-hover: #171717;
+  --bg-overlay: rgba(0, 0, 0, 0.88);
 
-  --text-primary: #ededf0;
-  --text-secondary: #8e8e9a;
-  --text-muted: #5c5c6e;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
   --text-faint: #3f3f4e;
 
   /* Accent Colors — refined, non-neon */
@@ -39,9 +39,9 @@
   --amber-subtle: rgba(242, 153, 74, 0.05);
 
   /* Borders — softer */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-medium: rgba(255, 255, 255, 0.10);
-  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.22);
 
   /* Surfaces */
   --surface-glass: rgba(18, 18, 26, 0.65);
@@ -250,7 +250,7 @@ h3 {
    ═══════════════════════════════════════════════ */
 
 .section {
-  padding: 7rem 0;
+  padding: 10rem 0;
   position: relative;
 }
 
@@ -313,14 +313,17 @@ h3 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-green) 0%, #00b080 100%);
-  color: #0a0a0f;
-  box-shadow: 0 4px 20px rgba(0, 212, 155, 0.15);
+  background: var(--text-primary);
+  color: var(--bg-base);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--text-primary);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 212, 155, 0.25);
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .btn-outline {
@@ -335,9 +338,9 @@ h3 {
 }
 
 .btn-glowing {
-  background: rgba(10, 10, 15, 0.7);
-  color: #ededf0;
-  border: 1px solid rgba(0, 212, 155, 0.25);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
   padding: 1rem 2.5rem;
   border-radius: var(--radius-md);
   font-size: 1rem;
@@ -345,12 +348,14 @@ h3 {
   font-family: var(--font-sans);
   cursor: pointer;
   transition: all var(--transition-base);
-  box-shadow: 0 4px 20px rgba(0, 212, 155, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .btn-glowing:hover {
-  border-color: rgba(0, 212, 155, 0.45);
-  box-shadow: 0 8px 30px rgba(0, 212, 155, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 30px rgba(0, 218, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
 }
 

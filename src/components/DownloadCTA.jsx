@@ -7,16 +7,11 @@ const DownloadCTA = () => {
   const { t } = useTranslation();
   return (
     <section className="cta-section section">
-      <div className="cta-bg-effects">
-        <div className="cta-orb cta-orb-1"></div>
-        <div className="cta-orb cta-orb-2"></div>
-      </div>
-
       <div className="container cta-content">
-        <div className="animate-fade-in text-center">
+        <div className="cta-box animate-fade-in text-center">
           <h2 className="cta-title">
             {t('cta.title1')}{' '}
-            <span className="gradient-text">{t('cta.title2')}</span>?
+            <span className="text-primary">{t('cta.title2')}</span>?
           </h2>
           <p className="cta-subtitle">
             {t('cta.subtitle')}
@@ -27,7 +22,7 @@ const DownloadCTA = () => {
               href="https://github.com/dsandovalflavio/amoxsql/releases"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-glowing cta-btn-main"
+              className="btn btn-primary cta-btn-main"
               onClick={() => trackEvent('download_click', { location: 'cta' })}
             >
               <Download size={20} />
@@ -67,36 +62,7 @@ const DownloadCTA = () => {
         .cta-section {
           position: relative;
           overflow: hidden;
-          padding: 8rem 0;
-        }
-
-        .cta-bg-effects {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-        }
-
-        .cta-orb {
-          position: absolute;
-          border-radius: 50%;
-          filter: blur(120px);
-        }
-
-        .cta-orb-1 {
-          width: 500px;
-          height: 500px;
-          background: radial-gradient(circle, rgba(0, 212, 155, 0.08) 0%, transparent 70%);
-          top: -200px;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        .cta-orb-2 {
-          width: 400px;
-          height: 400px;
-          background: radial-gradient(circle, rgba(0, 218, 255, 0.06) 0%, transparent 70%);
-          bottom: -200px;
-          right: 10%;
+          padding: 4rem 0 10rem 0;
         }
 
         .cta-content {
@@ -104,31 +70,42 @@ const DownloadCTA = () => {
           z-index: 1;
         }
 
+        .cta-box {
+          background: var(--surface-glass);
+          border: 1px solid var(--border-medium);
+          border-radius: var(--radius-xl);
+          padding: 5rem 2rem;
+          backdrop-filter: blur(30px);
+          -webkit-backdrop-filter: blur(30px);
+          box-shadow: 0 40px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.08);
+        }
+
         .cta-title {
           font-size: clamp(2rem, 5vw, 3.5rem);
           margin-bottom: 1.25rem;
           color: var(--text-primary);
+          letter-spacing: -0.03em;
         }
 
         .cta-subtitle {
           font-size: 1.15rem;
           color: var(--text-muted);
           max-width: 550px;
-          margin: 0 auto 2.5rem auto;
+          margin: 0 auto 3.5rem auto;
           line-height: 1.7;
         }
 
         .cta-actions {
           display: flex;
           justify-content: center;
-          gap: 1rem;
+          gap: 1.5rem;
           flex-wrap: wrap;
-          margin-bottom: 2rem;
+          margin-bottom: 3.5rem;
         }
 
         .cta-btn-main {
           font-size: 1.1rem;
-          padding: 1.1rem 2.5rem;
+          padding: 1.1rem 2.8rem;
         }
 
         .btn-sponsor {
@@ -138,46 +115,44 @@ const DownloadCTA = () => {
           font-size: 1.05rem;
           padding: 1.05rem 2.2rem;
           border-radius: var(--radius-md);
-          border: 1px solid rgba(219, 39, 119, 0.5);
-          background: rgba(219, 39, 119, 0.1);
-          color: #f472b6;
+          border: 1px solid var(--border-subtle);
+          background: rgba(255, 255, 255, 0.03);
+          color: var(--text-primary);
           text-decoration: none;
-          font-weight: 600;
+          font-weight: 500;
           transition: all var(--transition-base);
         }
 
         .btn-sponsor:hover {
-          border-color: rgba(219, 39, 119, 0.6);
-          background: rgba(219, 39, 119, 0.14);
-          color: #f9a8d4;
-          box-shadow: 0 4px 20px rgba(219, 39, 119, 0.12);
+          border-color: var(--border-medium);
+          background: rgba(255, 255, 255, 0.08);
           transform: translateY(-2px);
         }
 
         .cta-badges {
           display: flex;
           justify-content: center;
-          gap: 1.5rem;
+          gap: 2.5rem;
           flex-wrap: wrap;
         }
 
         .cta-badge {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          font-size: 0.82rem;
+          gap: 8px;
+          font-size: 0.9rem;
           font-weight: 500;
           color: var(--text-muted);
-          padding: 6px 14px;
-          border-radius: 100px;
-          border: 1px solid var(--border-subtle);
-          background: rgba(255, 255, 255, 0.02);
         }
 
         @media (max-width: 480px) {
           .cta-badges {
             flex-direction: column;
             align-items: center;
+            gap: 1.5rem;
+          }
+          .cta-box {
+            padding: 3rem 1.5rem;
           }
         }
       `}</style>

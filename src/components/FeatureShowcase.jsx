@@ -3,13 +3,13 @@ import { Code2, Database, BarChart3, FileText, Brain, GitBranch, Workflow } from
 import { useTranslation } from '../i18n';
 
 const featureConfig = [
-  { id: 'editor', icon: <Code2 size={22} />, image: 'sql-to-data-viz.png', accentColor: 'cyan' },
-  { id: 'inspector', icon: <Database size={22} />, image: 'table-details.png', accentColor: 'green' },
-  { id: 'visualization', icon: <BarChart3 size={22} />, image: 'data-viz-storytelling.png', accentColor: 'cyan' },
-  { id: 'notebooks', icon: <FileText size={22} />, image: 'sql-notebboks.png', accentColor: 'green' },
-  { id: 'ai', icon: <Brain size={22} />, image: 'ollamaserttings.png', accentColor: 'cyan' },
-  { id: 'debugging', icon: <GitBranch size={22} />, image: 'analize-execution-plan.png', accentColor: 'green' },
-  { id: 'dbt', icon: <Workflow size={22} />, image: 'sql-table-viewer.png', accentColor: 'cyan' },
+  { id: 'editor', icon: <Code2 size={22} />, image: '04_sql_editor.png', accentColor: 'cyan' },
+  { id: 'inspector', icon: <Database size={22} />, image: '10_er_diagram.png', accentColor: 'green' },
+  { id: 'visualization', icon: <BarChart3 size={22} />, image: '06_data_visualizer.png', accentColor: 'cyan' },
+  { id: 'notebooks', icon: <FileText size={22} />, image: '05_sql_notebook.png', accentColor: 'green' },
+  { id: 'ai', icon: <Brain size={22} />, image: '07_ai_sidebar.png', accentColor: 'cyan' },
+  { id: 'debugging', icon: <GitBranch size={22} />, image: '11_query_plan.png', accentColor: 'green' },
+  { id: 'dbt', icon: <Workflow size={22} />, image: '08_dbt_studio.png', accentColor: 'cyan' },
 ];
 
 const FeatureShowcase = () => {
@@ -135,9 +135,9 @@ const FeatureShowcase = () => {
 
         .feature-tab.active {
           color: var(--accent-cyan);
-          border-color: rgba(0, 218, 255, 0.3);
-          background: rgba(0, 218, 255, 0.05);
-          box-shadow: 0 0 15px rgba(0, 218, 255, 0.05);
+          border-color: rgba(0, 218, 255, 0.4);
+          background: rgba(0, 218, 255, 0.08);
+          box-shadow: 0 0 24px rgba(0, 218, 255, 0.15), inset 0 0 12px rgba(0, 218, 255, 0.05);
         }
 
         .tab-icon {
@@ -228,8 +228,9 @@ const FeatureShowcase = () => {
         }
 
         .preview-frame:hover {
-          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 218, 255, 0.04);
-          border-color: var(--border-strong);
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 218, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.3);
+          transform: translateY(-4px);
         }
 
         .preview-titlebar {

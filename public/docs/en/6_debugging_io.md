@@ -1,46 +1,70 @@
-# Advanced Debugging & IO Tools
+# Advanced Debugging & Data IO
 
-Writing fast and correct queries is only half the job of a data analyst or engineer. **AmoxSQL** supports deep cycles to identify functional problems, measure the volumetric processing time of large JOINs, and move Gigabytes of information between conventional physical transactional files and in-memory binaries.
+Writing fast and correct queries is only half the job of a data analyst or engineer. **AmoxSQL** supports deep cycles to identify functional issues, measure processing time for massive JOINs, and migrate Gigabytes of information between standard transaction physical files, binary in-memory storage, and now **Cloud Storage Services (S3 / GCS)**.
 
 ---
 
-## 1. Advanced Diagnostic Tools (Debugging)
+## 1. Advanced Debugging Tools
 
-### CTE Debugger (Analog SubQuery Progress)
-Common Table Expressions (CTEs) that use the `WITH AS (...)` clause can grow into unmanageable "queries within queries". An error in the second inferred table can drag on and multiply erratic joins towards the end of a 100-line Query.
+### CTE Debugger (Analog Progression of Subqueries)
+Common Table Expressions (CTEs) that utilize the `WITH AS (...)` clause can become unmanageable "queries inside queries."
 
 AmoxSQL integrates a heuristic logic parser over the Monaco Editor:
-1.  Seeks to identify `WITH` keywords and isolatedly locates each logical block name in the editor using advanced Regex.
-2.  Dynamically pops up "Visual Markers" or interactive "Play" icons in the precise line gutters where the temporary function is declared.
-3.  If one is clicked, it structurally uncouples the rest of the query below, converts the name to a variable, and executes a `SELECT * FROM Target_CTE_SubTable LIMIT 50` towards the C++ base passing it through a virtual preprocessor.
-4.  The user sees the timed results instantly in a Debug modal (`DebugResultModal.jsx`) without having to break and manually restructure their valuable Query texts, enabling a perimeter "Step-by-Step" cycle (*Step-through Debugging*).
+1.  It searches for `WITH` keywords and isolatedly locates each logical block name using advanced Regex.
+2.  It dynamically raises interactive "Play" icons exactly at the gutter of the line declaring a temp function.
+3.  If clicked, it structurally unbinds the rest of the query below, converts the name to a variable, and executes a `SELECT * FROM Target_CTE_SubTable LIMIT 50`.
+4.  The user sees the temporalized results instantly in a Debug Modal (`DebugResultModal.jsx`) without having to manually break and restructure their valuable query strings, enabling peripheral *Step-through Debugging*.
 
-### Query Execution Plan Visualizer Tree
-Understanding which underlying nodes are responsible for the computational "bottleneck" of a giant Query in DuckDB is crucial.
+### Visual Execution Tree (Query Execution Plan)
+Understanding exactly which underlying node is responsible for the computational "bottleneck" of a giant Query in DuckDB is crucial:
 
-*   AmoxSQL injects the explanatory keyword (`EXPLAIN ANALYZE`) within your Query request secretly intercepted by the IDE.
-*   Returns an intricate network of complex JSON serialization format.
-*   In the `QueryPlanViewer.jsx` component, the IDE does not paint the usual dull terminal line. It takes the JSON and sends it to the hyper-fast topographic math layout engine **Elkjs** (Eclipse Layout Kernel) asynchronously to calculate nodal XY positions.
-*   Paints code blocks as hierarchical "Cards" linked by SVG Curves, automatically painting with red alerts (`warning/red hue`) those elements with a "Cost Affinity" or very high percentage load compared to their parallel neighbors, which makes it extremely obvious to reveal table blockers like "Sequential Scans" vs "Index Seek".
+*   AmoxSQL injects the explain keyword (`EXPLAIN ANALYZE`) within the query request intercepted by the IDE.
+*   It returns an intricate network of complex JSON serialization formatting.
+*   In the `QueryPlanViewer.jsx` component, the IDE takes the JSON and asynchronously sends it to the `Elkjs` (Eclipse Layout Kernel) layout engine to calculate XY nodal positions.
+*   It paints code blocks as hierarchical "Cards" linked by SVG Curves, generating automatic red alerts on those elements with a very high "Cost Affinity" or percentage load.
+*   The `QueryPlanModal.jsx` presents the visualization in a full-screen modal with zoom controls.
 
-### Quality and Profiling Suite (`DataQualityModal.jsx`, `DataProfiler.jsx`)
-Before building aggregation models on unexplored tables, it is vital to audit column cleanliness. AmoxSQL's new automatic evaluator orchestrates this without writing code:
-1.  **Type and Distribution Detection:** The interface executes a cascade of background mathematical statistical sub-queries that reveals to the engineer `Nulls` counts, Cardinality (unique vs total elements), and Min/Max baselines.
-2.  **Automated Report of Nulls, Duplicates, and Outliers:** Through the `DataQualityModal`, users press a button that inspects each dataset column looking for aggressive standard deviations (quantile math), silent type inconsistencies, and repeated records, delivering a qualified visual report to approve or reject ingested data sources.
+### Quality and Profiling Suite V2 (`DataProfiler.jsx`)
+The Data Profiler (31KB+) was substantially refactored in v1.9.9. Before building aggregation models over unexplored tables, auditing column cleanliness is vital:
+
+1.  **C++ Type and Distribution Detection:** The interface executes a massive cascade of statistical sub-queries in DuckDB that reveal counts of `Nulls`, Zeros, Negatives, Cardinality (unique items vs total), Skewness, and Kurtosis.
+2.  **JS Rules and Alerts Engine:** A JavaScript statistical evaluator on the client side instantly inspects metrics, returning data quality flags or *warnings* (e.g., High Cardinality, Extreme Nulls, Constant Values).
+3.  **Interactive Visualization:** The profiler injects modern *Recharts* graphics (Numerical Histograms and Top Frequency Horizontal Bars) dominating the visual hierarchy of the report.
+4.  **Correlation Heatmap:** Automatic generation of a parametric correlation matrix (Pearson Coefficient) for all numeric variables on screen.
 
 ---
 
-## 2. Multi-format Ingestion and Export (Input/Output Management)
+## 2. Multi-Format Ingestion and Exporting (Input/Output Management)
 
-For a local analysis environment to have real global production value, it must function as the transducer node or universal transformational nexus of files between incoming "ugly/dirty" information and outgoing clean packaged results.
+For a local analysis environment to have real global production value, it must function as a transducer node or universal transformational nexus of files.
 
-### Smart Mass Imports
-Using Smart Import Modals, the IDE can absorb and transform local data sources towards `.db` volatile or physical tables and based on DuckDB's unmatched robustness:
-*   **Single File Level:** Bulk loading of `.CSV`, `.Parquet`, and `.JSON` extensions. Strict and dedicated support for **Microsoft Excel (.XLSX and .XLS)** via a specialized bridge module (`ImportExcelModal.jsx`), which loads multiple native sheets into JavaScript memory (via `xlsx` libraries) before asynchronously vectorizing them to the DuckDB database; overcoming the limitations other monolithic databases have to ingest native corporate spreadsheets.
-*   **Folder Level (Mass Import):** For temporal Data Lakes ingestions, you can select a rigid Windows folder and the IDE drafts an asynchronous automatic macro over NodeJS promises that creates Tables and appends all uniform parquets inside within milliseconds using the DuckDB wildcard command (`read_parquet('folder/*.parquet')`).
-*   **Incoming Metadata Cleaning (Slugify Headers):** It is very common to receive noisy corporate columns "Historical Sales 2023!!". During the import validation window, AmoxSQL detects such typing anomalies and offers a Toggle to automatically purify and inject clean safe *Snake Case* without special characters ("`historical_sales_2023`") before solidifying them in the Database.
+### Massive and Smart Imports
+Using Smart Import Modals, the IDE can absorb and transform local data origins:
+*   **Single File Level:** Mass load `.CSV`, `.Parquet`, and `.JSON` extensions. Dedicated support for **Microsoft Excel (.XLSX and .XLS)** via `ImportExcelModal.jsx`, which loads multiple native sheets into JavaScript memory (via `xlsx` library) before asynchronously vectorizing them to DuckDB.
+*   **Folder Level (Mass Import):** For temporary Data Lakes ingestions, you can select a Windows folder and the IDE drafts an asynchronous auto-macro creating Tables using DuckDB's wildcard (`read_parquet('folder/*.parquet')`).
+*   **Slugify Headers:** Erase noisy names during imports via an automatic *Snake Case* injection toggle ("`historical_sales_2023`").
 
-### File Output (Session Exports)
-Once the local in-memory transactional calculation is resolved:
-The native `ExportDataModal.jsx` module allows capturing the executed Query domains and delegating from the Frontend to the DuckDB (Server) engine the express order of `COPY TO 'path/output'`.
-This system supports clean and high-performance download in the following native analytical export formats: **CSV (Comma Separated)**, **Structured JSON**, **Columnar Parquet** for Big Data, and surprisingly now allows transcribing giant sets back to **Excel (XLSX)**, offering data ready to be consumed by accounting auditing entities or third-party software layers requiring traditional spreadsheets.
+### Output to File (Session Exports)
+The `ExportDataModal.jsx` module (15KB+) delegates from the Frontend to the DuckDB engine the express command `COPY TO 'path/output'`:
+*   **Live Editor Context:** The Export system extracts the Active Code Block in real-time directly from the underlying Monaco Editor.
+*   **Export Worker (`exportWorker.js`):** A dedicated Web Worker handles long exports in the background to avoid blocking the user interface.
+*   **Supported Formats:** CSV, structured JSON, Columnar Parquet, and Excel (XLSX).
+
+---
+
+## 3. Cloud Storage
+
+One of the most significant additions in v1.9.9 is the ability to export data directly to cloud storage services.
+
+### AWS S3
+From the "Cloud Storage" tab of `SettingsModal`, you can configure:
+*   **Access Key ID and Secret Key:** AWS IAM credentials.
+*   **Region:** Bucket region (e.g., `us-east-1`).
+*   **Endpoint:** Custom endpoint for S3-compatible services (MinIO, DigitalOcean Spaces, etc.).
+*   **Default Bucket / Connection Test.**
+
+### Google Cloud Storage (GCS)
+Similar configuration via Google Cloud service credentials (HMAC Access Keys).
+
+### Cloud Export Flow
+The `ExportDataModal` integrates the cloud destination option alongside local exports. DuckDB utilizes its native extensions (`httpfs`, `aws`) to directly write to the configured bucket, leveraging the speed of the columnar engine for massive efficient transfers.

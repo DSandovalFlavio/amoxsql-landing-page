@@ -1,76 +1,125 @@
-# Core Architecture & Workflow
+# Core Architecture and Workflow
 
-The core architecture of **AmoxSQL** is built on principles of modularity, strict resilience in memory management at the system level, and a user experience that faithfully emulates industrial-grade Code Editors (IDEs).
+The core architecture of **AmoxSQL** (v1.9.9) is built on principles of modularity, strict memory management at the system level, and a user experience that faithfully emulates industrial-grade IDEs with a design system inspired by **Linear**.
 
-Below, we exhaustively document the fundamental systems and the IDE lifecycle.
+Below, we comprehensively document the fundamental systems and the IDE's lifecycle.
 
 ---
 
-## 1. The Central Command Palette (`CommandPalette.jsx`)
+## 1. Linear UI Design System
 
-To ensure an optimized keyboard workflow (*"Keyboard-First Workflow"*), the most significant addition to AmoxSQL's global usability is the Omnipresent Launcher (globally accessible with `Ctrl+K` or `Cmd+K`).
+In version 1.9.9, AmoxSQL adopts a complete design system inspired by **Linear**, with design tokens, CSS class migration, and a comprehensive audit of all components. This redesign includes:
 
-Instead of relying on slow top-bar menus, the Palette engine instantly indexes a dynamic registry of actions. It acts as the central nervous system, delegating direct operations such as:
-*   `Run Query` (`Ctrl+Enter`): Triggers asynchronous calls to the engine.
+### Design Tokens and CSS Variables
+The entire visual system is controlled by global CSS variables defined in `index.css` (156KB+), organized into semantic layers:
+*   **Surfaces:** `--surface-base`, `--surface-raised`, `--surface-overlay`, `--surface-elevated` — Define the visual hierarchy of depth.
+*   **Text:** `--text-primary`, `--text-secondary`, `--text-tertiary`, `--text-muted`, `--text-active` — Scale of typographic prominence.
+*   **Borders:** `--border-subtle`, `--border-default`, `--border-strong`, `--border-hover` — For separators and containers.
+*   **Accents:** `--accent-primary`, `--accent-secondary`, `--accent-muted`, `--accent-color-user` — Dynamic accent color selected by the user.
+*   **Feedback:** Dedicated variables for success, error, warning, and information states.
+
+### 8 Color Themes
+The IDE offers 8 complete color themes, selectable from the `SettingsModal.jsx`:
+
+| Theme | Type | Description |
+|------|------|-------------|
+| **Obsidian** | Dark | The deepest and darkest, almost black background |
+| **Onyx** | Dark | Black with subtle bluish hints |
+| **Carbon** | Dark | Dark bluish-gray, balanced |
+| **Graphite** | Dark | Dark warm gray |
+| **Nord Dark** | Dark | Inspired by the Nordic Polar palette |
+| **Ivory** | Light | Warm like antique paper |
+| **Mist** | Light | Cold like morning fog |
+| **Light** | Light | Clean and bright, classic white |
+
+### 13 Accent Colors
+Organized into two palettes:
+*   **Vibrant (7):** Cyan (default), Aqua, Sky, Azure, Blue, Cobalt, Linear Blue.
+*   **Sober (6):** Sage, Amber, Rose, Lavender, Steel, Copper.
+
+The selected accent is randomly injected throughout the IDE via `--accent-color-user`, affecting buttons, active borders, selection indicators, and badges.
+
+### Editor Layout: Horizontal / Vertical
+The user can toggle between two editor layouts from the settings:
+*   **Horizontal (default):** Editor on top, results below — ideal for standard monitors.
+*   **Vertical:** Editor on left, results on right — optimized for ultrawide monitors.
+
+---
+
+## 2. The Central Command Palette (`CommandPalette.jsx`)
+
+To guarantee a "Keyboard-First Workflow", the Omnipresent Launcher (accessible globally with `Ctrl+K` or `Cmd+K`) is the IDE's central nervous system.
+
+Unlike relying on slow top-bar menus, the Palette engine indexes a dynamic registry of actions instantly:
+*   `Run Query` (`Ctrl+Enter`): Triggers async calls to the engine.
 *   `Save File` (`Ctrl+S`): Serializes the editor state to the local magnetic disk without touching the UI.
-*   `Navigation / Extensions`: Invokes reactive changes to the Layout Manager to mutate the left accordion or force the opening of AI intelligences with a click.
+*   `Navigation / Extensions`: Invokes reactive changes to the Layout Manager to mutate the left accordion or force the opening of AI intelligences with one click.
 
-Each of these actions and shortcuts can be graphically audited using the `KeyboardShortcutsModal.jsx`, allowing the user to know all "Hotkeys" in a unified manner.
+Each of these actions and shortcuts can be audited graphically via `KeyboardShortcutsModal.jsx`, giving the user a unified view of all shortcuts.
 
 ---
 
-## 2. Project-Centric Workflow
+## 3. Project-Centric Design
 
-AmoxSQL abandons the classic idea of database management tools that demand static credentials and open ports. By running a *Serverless* and *In-Process* database like **DuckDB**, the concept of a connection evolves into a concept of a working environment entirely based on the user's file system.
+AmoxSQL abandons the classic idea of database tools that require static credentials and open ports. Operating with a Serverless and In-Process database like DuckDB, the concept of connection evolves to a workspace concept based entirely on the user's filesystem.
 
-### The project opening cycle:
-1.  **Welcome Screen:** The initial entry point, programmed in `WelcomeScreen.jsx`. It mandatorily requests an **Absolute Path** on the operator's computer.
-2.  **Validation and Scanning:** Upon receiving the path, the backend intercepts the command through Node.js native file system APIs (`fs`). The system recursively traverses the requested directory using asynchronous algorithms to identify:
+### Project Opening Cycle:
+1.  **Welcome Screen:** The initial entry point, programmed in `WelcomeScreen.jsx`. It mandatorily requests an **Absolute Path** on the operator's computer. It includes a list of recent projects for quick access.
+2.  **Validation and Scanning:** Upon receiving the path, the backend intercepts the command via Python/Node native filesystem APIs (`fs`). The system recursively crawls the requested directory to identify:
     *   Existing DuckDB database files (`.duckdb`, `.db`).
-    *   Saved SQL files from previous sessions (`.sql`).
-    *   Persistent graphical configurations of AmoxSQL (`.amoxvis`).
+    *   Saved SQL scripts from previous sessions (`.sql`).
+    *   AmoxSQL visual persistent configurations (`.amoxvis`).
     *   Interactive notebooks (`.sqlnb`).
-3.  **Explorer Bootstrapping:** After validating the path's existence, the IDE starts, initializing its stateful `FileExplorer` on the left and leaving its Central Layout clean in standby mode, injecting all the localized file paths into the main React *Global Context* in the Frontend.
+3.  **Bootstrapping the Explorer:** After validating the path, the IDE boots, state-initializing its `FileExplorer` on the left and preparing its Central Layout, injecting all located file paths into the main React Global Context in the Frontend.
 
 ---
 
-## 3. Robust Connection Management & Hard Reset
+## 4. Robust Connection Management (Hard Reset)
 
-Under the hood, on the server, there is a vital Node.js Singleton called **`DatabaseManager.js`**. Its main goal is to avoid dreaded "memory leaks" or locked binary files issues caused by uncontrolled hard closures of transactional databases, common on Windows OS.
+Under the hood, on the server, there is a vital Node.js Singleton called **`DatabaseManager.js`**. Its main goal is to avoid dreaded memory leaks or binary files locked by uncontrolled shutdowns of transactional databases.
 
 ### Interactive Database Modes
-The connection modal (`DatabaseSelectionModal.jsx` interacting with `DatabaseManager.connect()`) explicitly offers three operational connection vectors to the developer:
+The connection modal offers three operational connection vectors:
+*   **In-Memory Mode:** Completely fresh DuckDB instance that doesn't touch the hard drive. Data is lost as soon as the process closes.
+*   **Read-Only Mode:** Attaches (`ATTACH`) to the designated DuckDB database assuming a `read_only=true` flag. This allows opening multiple AmoxSQL IDEs on the same database without corruption.
+*   **Read/Write Mode:** `DatabaseManager` acquires absolute lock control of the file on the disk system.
 
-*   **In-Memory Mode:** A completely fresh DuckDB instance that does not touch the hard drive. Data is lost as soon as the process is closed. Used mainly for large batch calculations and cleaning data coming from Parquet formats or remote Amazon S3 files, exploiting the supersonic RAM read/write capabilities of the Hardware.
-*   **Persistence (Read-Only Mode):** It "attaches" (`ATTACH`) to the designated DuckDB database assuming a `read_only=true` flag. The `DatabaseManager` blocks local modifications via security commands. This scheme allows opening several AmoxSQL IDEs on the same database without corruption, essential for concurrent data analysis on a local network or when other ETLs are populating the master `.db` structure.
-*   **Persistence (Read/Write Mode):** The `DatabaseManager` acquires absolute control (Lock) of the file on the disk system.
-
-### "Hard Reset" Multi-Tenant Strategy
-Because Node and C++ DuckDB live in very tight co-dependencies of asynchronous I/O read promises, if the user decides to *Change Project* without physically restarting the application (from `MenuBar.jsx`), AmoxSQL triggers a strict chain designed in the `reinitializeSystem()` function inside `DatabaseManager.js`:
-1.  Orders to kill all running promises (`.kill()`) or open connections (`connection.close()`).
-2.  Unlinks open master instances from memory `this.instance = null`.
-3.  At the Operating System level, clears the cached persistence to ensure the file explorer and APIs stop listening (`_initSystem()`).
-4.  This "Hard Reset" methodology prevents "Zombie" binary locks from occurring, something that would typically require a forced close from the Windows Task Manager.
+### Multi-Tenant "Hard Reset" Strategy
+If the user decides to *Change Project* without physically restarting the app, AmoxSQL triggers a strictly designed chain (`reinitializeSystem()`) in `DatabaseManager.js`:
+1.  Kills all running promises or open connections (`connection.close()`).
+2.  Unbinds memory of main open instances `this.instance = null`.
+3.  OS-level persistence is cleared to ensure file explorers and APIs stop listening.
 
 ---
 
-## 4. Multi-Tab and Views Interface Architecture (Layout Manager)
+## 5. Multi-Tab Architecture and Split Views (Layout Manager)
 
-To match the flexibility and architectural UX freedom proposed by massive systems like Eclipse, VS Code, or Jetbrains, AmoxSQL implements its own partition and state engine using a module called `LayoutManager.jsx`. It's not simply re-drawing divs; it's storing a complete document lifecycle and the interface buffer in memory.
+AmoxSQL implements its own partition and state engine using `LayoutManager.jsx` (30KB+). It stores a complete document cycle and interface buffer in memory with a *card-based floating layout*.
 
 ### Long-Lived Reactive States
 When a user opens three long code tabs (`script_1.sql`, `notebook.sqlnb`, `ventas.amoxvis`):
 *   The Frontend context carries a vector of complex objects called **Tabs**.
-*   Each *Tab* includes a unique `id`, a `type` (which dictates to `EditorPane.jsx` which React component to mount on that tab, for example, `SqlEditor` versus `SqlNotebook`), the file path for asynchronous write saving, and a record of what the Monaco Editor in the Frontend is currently drawing in its text buffer (`docModel`).
-*   This ensures that the user can switch contexts quickly without losing where their blinking cursor was left or losing results from previous executions, preserving everything instantly over RAM cache in a super advanced *Single Page Application* model.
+*   Each *Tab* includes a unique id, a `type` that dictates what React component to mount on that tab, the file path for async writing, and a registry of the underlying Monaco text buffer (`docModel`).
+*   The redesigned `TabBar.jsx` shows tabs with distinct file icons and visual states according to the active theme.
 
 ### Split Views Controls
-AmoxSQL's main window is designed in flexible sections that can be resized.
-1.  **Sidebar:** Works as a hybrid Accordion. It encompasses the File Explorer for managing base scripts and notebooks, but with a global Switch that can entirely swap it to become an Amox AI Manager (`AiSidebar.jsx`) or purely a Database Inspector and Viewer (`DatabaseExplorer.jsx`).
-2.  **Bottom Panels:** Logically abstracted from execution. Once the Backend fires and completes the giant JSON response of a Query result, that data is channeled to the bottom panel, which in turn becomes a Tab Sub-Manager:
-    *   Allows toggling to evaluate flat Data in the virtual grid of `ResultsTable.jsx`.
-    *   Toggle to visual analysis in `DataVisualizer.jsx`.
-    *   This dual Central Editing Panel + Bottom Results Panel system promotes a cyclical iterativity in Query and Visualization construction, reducing validation and confirmation times and facilitating direct debugging with a view of the source of truth of the data in real-time.
+The main AmoxSQL window is designed in flexible resizable sections:
+1.  **Custom Title Bar (`WindowTitleBar.jsx`):** Native Electron title bar showing active project and controls.
+2.  **Sidebar:** A hybrid Accordion holding the File Explorer, which can globally swap to the AI Manager (`AiSidebar.jsx`), Database Explorer (`DatabaseExplorer.jsx`), or DBT Studio (`DbtPanel.jsx`).
+3.  **The Bottom Panel:** Once JSON results array returns, the data goes here and converts to a Sub-Tab manager:
+    *   Virtual Grid `ResultsTable.jsx`.
+    *   Visual analyses in `DataVisualizer`.
+    *   Statistical profile in `DataProfiler.jsx`.
+4.  **Popout Results (`PopoutResultsPage.jsx`):** Query results can be detached to an independent Electron window.
 
 ### Visual Layout Persistence
-The ergonomics of the tool are ensured in the program's lifecycle. If the user drags the border of the `Split Views` making them from `250px` to `400px` to be able to read tables with very long names, or if they decide to pin a *Light Mode* or *Dark Mode* theme via unified settings, the system stores the tolerances and preferences (`LayoutWidth`, `Theme`) at the `localStorage` and Electron user profile file level so that next time AmoxSQL natively opens any project, all windows and preferences re-accommodate as they were left in milliseconds.
+The exact tolerances (LayoutWidth, Theme, AccentColor, EditorLayout) are dumped to Electron settings JSON/localStorage per profile so the workflow picks up exactly where left off.
+
+---
+
+## 6. Status Bar (`StatusBar.jsx`)
+
+A compact status bar showing:
+*   **Connection State:** Visual indicator of active connection mode (In-Memory, Read-Only, R/W).
+*   **Project Info:** Active project path and DB connected via `ProjectInfo.jsx`.
+*   **Toast Notifications (`ToastProvider.jsx`):** Unintrusive global notification system with soft animations.

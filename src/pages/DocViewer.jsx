@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { useTranslation } from '../i18n';
 
 const DocViewer = ({ filename }) => {
@@ -8,6 +9,7 @@ const DocViewer = ({ filename }) => {
   const { lang } = useTranslation();
 
   useEffect(() => {
+    // eslint-disable-next-line
     setLoading(true);
     // Fetch the raw markdown file from the language-specific folder
     fetch(`${import.meta.env.BASE_URL}docs/${lang}/${filename}`)
@@ -16,7 +18,7 @@ const DocViewer = ({ filename }) => {
         return response.text();
       })
       .then(text => setContent(text))
-      .catch(err => setContent('# Error\\nFailed to load the documentation file. Please try again.'))
+      .catch(() => setContent('# Error\\nFailed to load the documentation file. Please try again.'))
       .finally(() => setLoading(false));
   }, [filename, lang]);
 
@@ -30,7 +32,7 @@ const DocViewer = ({ filename }) => {
 
   return (
     <div className="markdown-body" style={{ animation: 'fadeInUp 0.5s ease forwards' }}>
-      <ReactMarkdown>{content}</ReactMarkdown>
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
 
       <style>{`
         .doc-loading {

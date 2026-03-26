@@ -84,8 +84,8 @@ const Hero = () => {
               <div style={{ width: 60 }}></div>
             </div>
             <img
-              src={`${import.meta.env.BASE_URL}assets/sql-to-data-viz.png`}
-              alt="AmoxSQL IDE showing SQL editor and data visualization"
+              src={`${import.meta.env.BASE_URL}assets/02_main_ide.png`}
+              alt="AmoxSQL IDE v1.9.9 interface"
               className="hero-screenshot"
               loading="eager"
             />
@@ -119,19 +119,19 @@ const Hero = () => {
         }
 
         .hero-orb-1 {
-          width: 600px;
-          height: 600px;
-          background: radial-gradient(circle, rgba(0, 218, 255, 0.12) 0%, transparent 70%);
-          top: -200px;
-          right: -100px;
+          width: 800px;
+          height: 800px;
+          background: radial-gradient(circle, rgba(0, 218, 255, 0.15) 0%, transparent 60%);
+          top: -300px;
+          right: -150px;
         }
 
         .hero-orb-2 {
-          width: 500px;
-          height: 500px;
-          background: radial-gradient(circle, rgba(0, 212, 155, 0.08) 0%, transparent 70%);
-          bottom: -150px;
-          left: -100px;
+          width: 700px;
+          height: 700px;
+          background: radial-gradient(circle, rgba(0, 212, 155, 0.12) 0%, transparent 60%);
+          bottom: -250px;
+          left: -150px;
         }
 
         .hero-grid-pattern {

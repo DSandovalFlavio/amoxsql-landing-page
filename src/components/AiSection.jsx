@@ -131,12 +131,12 @@ const AiSection = () => {
         .ai-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
-          margin-bottom: 2rem;
+          gap: 2.5rem;
+          margin-bottom: 3.5rem;
         }
 
         .ai-card {
-          padding: 2rem;
+          padding: 2.5rem;
           border-radius: var(--radius-lg);
           background: var(--surface-card);
           border: 1px solid var(--border-subtle);
@@ -247,7 +247,7 @@ const AiSection = () => {
         }
 
         .rag-card {
-          padding: 2.5rem;
+          padding: 3rem;
         }
 
         .rag-title {
@@ -270,7 +270,7 @@ const AiSection = () => {
         .rag-steps {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 1rem;
+          gap: 2rem;
         }
 
         .rag-step {

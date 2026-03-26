@@ -12,7 +12,7 @@ const translations = {
 
         // Hero
         hero: {
-            badge: 'Built for data people · v1.6.0',
+            badge: 'Built for data people · v1.9.9',
             titleMuted1: 'The Modern Codex',
             titleMuted2: 'for Local',
             titleAccent: 'Data Analysis',
@@ -44,27 +44,27 @@ const translations = {
                 },
                 {
                     badge: 'Data Warehouse-Style',
-                    title: 'Deep Table Inspector',
-                    description: 'Right-click any table for a full-screen deep dive. Four specialized tabs: Schema view with types and keys, Data Profile with statistical sparklines, paginated Preview of raw data, and the original DDL statement.',
-                    highlights: ['Schema analysis', 'Data profiling', 'Sparkline quality alerts', 'DDL reverse-engineering'],
+                    title: 'Deep Table Inspector & ER Diagrams',
+                    description: 'Right-click any table for a full-screen deep dive. Explore interactive ER Diagrams, evaluate structural Schema Diffs, and use Data Profiler V2 with statistical sparklines, paginated Previews, and the original DDL statement.',
+                    highlights: ['Interactive ER Diagrams', 'Schema Diff tool', 'Data Profiler V2', 'DDL reverse-engineering'],
                 },
                 {
                     badge: 'Recharts Engine',
                     title: 'Dynamic Data Visualization',
-                    description: 'Turn any query into interactive charts instantly. Line, Bar, Scatter, and Donut charts with pivot aggregation, reference lines for storytelling, smart number formatting, and 4x retina PNG export.',
-                    highlights: ['6 chart types', 'Pivot & aggregation', 'Reference indicators', '4x PNG export'],
+                    description: 'Turn any query into interactive charts instantly. Supports 8 chart types including Combo, Funnel, and Heatmap with pivot aggregation, reference lines for storytelling, smart number formatting, and 4x retina PNG export.',
+                    highlights: ['8 chart types (Funnel, Heatmap)', 'Pivot & aggregation', 'Storytelling indicators', '4x PNG export'],
                 },
                 {
                     badge: 'Hybrid .sqlnb',
                     title: 'SQL Notebooks',
-                    description: 'A Jupyter-like experience for SQL. Combine rich Markdown documentation with executable SQL cells. Switch to Presentation Mode to hide code and display a clean report with charts, then export to PDF.',
-                    highlights: ['Markdown + SQL cells', 'Presentation mode', 'PDF export', 'Per-cell results'],
+                    description: 'A Jupyter-like experience for SQL. Combine rich Markdown documentation with executable SQL cells in a new card-based floating layout. Switch to Presentation Mode to hide code and display a clean report, then export to PDF.',
+                    highlights: ['Card-based floating layout', 'Markdown + SQL cells', 'Presentation mode', 'PDF export'],
                 },
                 {
                     badge: 'Local & Cloud AI',
                     title: 'Zero-Hallucination AI Assistant',
-                    description: 'Connect offline Ollama models (Qwen, Llama) for 100% private AI or use Google Gemini for cloud power. Smart RAG injects your real schema into prompts, enforcing DuckDB dialect to prevent AI mistakes.',
-                    highlights: ['100% offline mode', 'Schema-aware RAG', 'DuckDB dialect enforced', 'Auto SQL parsing'],
+                    description: 'Agentic tool-calling architecture. Connect offline Ollama models for 100% private AI or use Google Gemini for cloud power. Enjoy persistent conversations and smart RAG that injects your real schema into prompts.',
+                    highlights: ['Agentic tool-calling', '100% offline mode', 'Persistent conversations', 'Schema-aware RAG'],
                 },
                 {
                     badge: 'Step-Through',
@@ -181,6 +181,9 @@ const translations = {
                 'data-vis': 'Data Visualization',
                 'ai-integration': 'AI Integration',
                 debugging: 'Debugging & IO',
+                'dbt-studio': 'DBT Studio',
+                'data-engineering': 'Data Engineering',
+                'ide-configuration': 'IDE Configuration',
             },
         },
     },
@@ -196,7 +199,7 @@ const translations = {
 
         // Hero
         hero: {
-            badge: 'Construido para DuckDB · v1.6.0',
+            badge: 'Construido para DuckDB · v1.9.9',
             titleMuted1: 'El Códice Moderno',
             titleMuted2: 'para',
             titleAccent: 'Local Data Analysis',
@@ -228,27 +231,27 @@ const translations = {
                 },
                 {
                     badge: 'Formato Data Warehouse',
-                    title: 'Deep Table Inspector',
-                    description: 'Haz clic derecho en cualquier tabla para un deep-dive visual. Cuatro pestañas especializadas: Vista del Schema con data types y foreign keys, Data Profile con quality sparklines, paginación de raw data, y el DDL statement original.',
-                    highlights: ['Análisis de schema', 'Data profiling', 'Alertas de dataset', 'Ingeniería inversa DDL'],
+                    title: 'Deep Table Inspector & ER Diagrams',
+                    description: 'Haz clic derecho en cualquier tabla para un deep-dive visual. Explora Diagramas ER interactivos, evalúa Schema Diffs estructurales y usa el Data Profiler V2 con quality sparklines, paginación de raw data, y el DDL statement original.',
+                    highlights: ['Diagramas ER interactivos', 'Herramienta Schema Diff', 'Data Profiler V2', 'Ingeniería inversa DDL'],
                 },
                 {
                     badge: 'Motor Recharts',
                     title: 'Visualización Dinámica de Datos',
-                    description: 'Convierte cualquier query en gráficos interactivos al instante. Line, Bar, Scatter y Donut charts con pivot aggregation, reference lines para data storytelling, smart number formatting y exportación PNG a 4x retina.',
-                    highlights: ['6 tipos de gráficos', 'Pivot y agregación', 'Storytelling indicators', 'Exportación PNG 4x'],
+                    description: 'Convierte cualquier query en gráficos interactivos al instante. Soporta 8 tipos incluyendo Combo, Funnel y Heatmap con pivot aggregation, reference lines para data storytelling, smart number formatting y exportación PNG a 4x retina.',
+                    highlights: ['8 tipos de gráficos (Funnel, Heatmap)', 'Pivot y agregación', 'Storytelling indicators', 'Exportación PNG 4x'],
                 },
                 {
                     badge: 'Híbrido .sqlnb',
                     title: 'SQL Notebooks',
-                    description: 'Una experiencia tipo Jupyter pensada para el Data Analyst. Combina documentación en Markdown con celdas ejecutables de SQL. Cambia al Presentation Mode para simplificar la vista en un reporte nítido con dashboards locales, listo para exportación a PDF.',
-                    highlights: ['Markdown + SQL cells', 'Presentation mode', 'Exportar a PDF', 'Dashboards locales'],
+                    description: 'Experiencia tipo Jupyter pensada para Análisis de Datos. Combina Markdown con celdas ejecutables de SQL en un nuevo diseño de layout flotante basado en tarjetas (card-based). Cambia al Presentation Mode para un reporte nítido, listo para exportación a PDF.',
+                    highlights: ['Card-based floating layout', 'Markdown + SQL cells', 'Presentation mode', 'Exportar a PDF'],
                 },
                 {
                     badge: 'IA Local y Cloud',
                     title: 'AI Assistant Libre de Alucinaciones',
-                    description: 'Conecta modelos Ollama offline (Qwen, Llama) para IA 100% privada o usa Google Gemini en la nube. Un robusto motor RAG inyecta tu verdadero schema en los prompts, exigiendo dialecto DuckDB para prevenir errores de parsing.',
-                    highlights: ['Modo 100% offline', 'Schema-aware RAG', 'Forced DuckDB dialect', 'Auto-parsing SQL'],
+                    description: 'Arquitectura agéntica con tool-calling. Conecta modelos Ollama offline para IA 100% privada o usa Google Gemini en la nube. Disfruta de historial de chats persistentes y un motor RAG que previene alucinaciones de código.',
+                    highlights: ['Arquitectura agéntica (tool-calling)', 'Historial de chats persistente', 'Modo 100% offline', 'Schema-aware RAG'],
                 },
                 {
                     badge: 'Paso a Paso',
@@ -365,6 +368,9 @@ const translations = {
                 'data-vis': 'Visualización de Datos',
                 'ai-integration': 'Integración IA',
                 debugging: 'Depuración y E/S',
+                'dbt-studio': 'DBT Studio',
+                'data-engineering': 'Ingeniería de Datos',
+                'ide-configuration': 'Configuración del IDE',
             },
         },
     },
@@ -384,7 +390,10 @@ export function LanguageProvider({ children }) {
     useEffect(() => {
         try {
             localStorage.setItem('amoxsql-lang', lang);
-        } catch { }
+        } catch (e) { 
+            // LocalStorage might be blocked
+            console.warn('Failed to save language preference', e);
+        }
     }, [lang]);
 
     const t = (key) => {
@@ -403,6 +412,7 @@ export function LanguageProvider({ children }) {
     );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTranslation() {
     const context = useContext(LanguageContext);
     if (!context) {
