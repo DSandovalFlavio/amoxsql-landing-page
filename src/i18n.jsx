@@ -1,409 +1,206 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const translations = {
-    en: {
-        // Navbar
+    es: {
         nav: {
-            home: 'Home',
-            features: 'Features',
+            capabilities: 'Capacidades',
+            privacy: 'Privacidad',
             docs: 'Docs',
-            sponsor: 'Sponsor',
+            github: 'GitHub',
+            download: 'Descargar',
         },
-
-        // Hero
         hero: {
-            badge: 'Built for data people · v1.9.9',
-            titleMuted1: 'The Modern Codex',
-            titleMuted2: 'for Local',
-            titleAccent: 'Data Analysis',
-            subtitle: 'A local-first, zero-latency SQL IDE that combines the power of DuckDB with offline AI, interactive notebooks, and dynamic visualizations. Your data never leaves your machine.',
-            downloadBtn: 'Download for Windows',
-            githubBtn: 'View on GitHub',
-            statRows: 'Rows/sec',
-            statOffline: 'Offline',
-            statCloud: 'Cloud Deps',
+            pill: 'Windows + macOS',
+            title1: 'Tu estudio de datos completo,',
+            titleAccent: 'en una sola app.',
+            subtitle: 'SQL, notebooks, visualización, reportes y IA — sobre DuckDB, sin nube, en tu escritorio.',
+            ctaDownload: 'Descargar gratis',
+            ctaCapabilities: 'Ver capacidades',
+            meta: 'Windows · macOS (beta) · compilar desde fuente es siempre gratis',
+            screenshotAlt: 'El IDE de AmoxSQL: explorador de esquema, editor SQL y tabla de resultados',
         },
-
-        // Tech Strip
-        tech: {
-            label: 'Powered by',
-        },
-
-        // Features
-        features: {
-            badge: 'Core Features',
-            title1: 'Everything You Need,',
-            title2: "Nothing You Don't",
-            subtitle: 'Integrated modules replace an entire stack of fragmented data tools.',
-            items: [
-                {
-                    badge: 'Monaco Editor',
-                    title: 'Industrial-Grade SQL Editor',
-                    description: 'Powered by the same engine behind VS Code. Get rich IntelliSense auto-completion for DuckDB dialect, multi-cursor editing, regex search & replace, and contextual execution — highlight any block and run only that selection.',
-                    highlights: ['DuckDB IntelliSense', 'Multi-cursor editing', 'Partial execution', 'Code folding'],
+        bento: {
+            kicker: 'Todo el flujo, sin salir',
+            title: 'De la consulta al reporte final',
+            subtitle: 'Ocho herramientas integradas sobre un único motor. Lo que antes eran cinco apps, aquí es una.',
+            cards: {
+                storyFlow: {
+                    title: 'Story Flow',
+                    desc: 'Tipos de gráfico en un flujo de 6 etapas: anotaciones, KPIs, énfasis y narrativa. Los datos cuentan su historia.',
                 },
-                {
-                    badge: 'Data Warehouse-Style',
-                    title: 'Deep Table Inspector & ER Diagrams',
-                    description: 'Right-click any table for a full-screen deep dive. Explore interactive ER Diagrams, evaluate structural Schema Diffs, and use Data Profiler V2 with statistical sparklines, paginated Previews, and the original DDL statement.',
-                    highlights: ['Interactive ER Diagrams', 'Schema Diff tool', 'Data Profiler V2', 'DDL reverse-engineering'],
+                dataFlow: {
+                    title: 'Data Flow',
+                    desc: 'Nodos para construir pipelines visuales (DAG) con ejecución por pasos y enriquecimiento con IA.',
                 },
-                {
-                    badge: 'Recharts Engine',
-                    title: 'Dynamic Data Visualization',
-                    description: 'Turn any query into interactive charts instantly. Supports 8 chart types including Combo, Funnel, and Heatmap with pivot aggregation, reference lines for storytelling, smart number formatting, and 4x retina PNG export.',
-                    highlights: ['8 chart types (Funnel, Heatmap)', 'Pivot & aggregation', 'Storytelling indicators', '4x PNG export'],
+                ai: {
+                    title: 'IA agéntica',
+                    desc: 'Asistente + Deep Dive que explora tu base por sí solo. Local con Ollama o con tu proveedor de nube.',
                 },
-                {
-                    badge: 'Hybrid .sqlnb',
+                editor: {
+                    title: 'Editor SQL',
+                    desc: 'Monaco con autocompletado que entiende tu esquema real — incluidas columnas de CTEs — y depuración de CTEs.',
+                },
+                notebooks: {
                     title: 'SQL Notebooks',
-                    description: 'A Jupyter-like experience for SQL. Combine rich Markdown documentation with executable SQL cells in a new card-based floating layout. Switch to Presentation Mode to hide code and display a clean report, then export to PDF.',
-                    highlights: ['Card-based floating layout', 'Markdown + SQL cells', 'Presentation mode', 'PDF export'],
+                    desc: 'Análisis narrados con celdas reactivas; export a HTML, Word y PDF.',
                 },
-                {
-                    badge: 'Local & Cloud AI',
-                    title: 'Zero-Hallucination AI Assistant',
-                    description: 'Agentic tool-calling architecture. Connect offline Ollama models for 100% private AI or use Google Gemini for cloud power. Enjoy persistent conversations and smart RAG that injects your real schema into prompts.',
-                    highlights: ['Agentic tool-calling', '100% offline mode', 'Persistent conversations', 'Schema-aware RAG'],
+                reportFlow: {
+                    title: 'Report Flow',
+                    desc: 'Presentaciones con gráficos refrescables; export a PowerPoint editable.',
                 },
-                {
-                    badge: 'Step-Through',
-                    title: 'CTE Debugger & Execution Plan',
-                    description: 'Click the Play icon next to any WITH clause to inspect intermediate CTE results without rewriting your query. Visualize query performance with an interactive Elkjs-powered execution plan tree that highlights bottlenecks.',
-                    highlights: ['CTE step-through', 'Elkjs plan tree', 'Bottleneck detection', 'Cost analysis'],
+                dbt: {
+                    title: 'DBT Studio',
+                    desc: 'Modelos, sources, comandos y grafo de linaje con dbt + DuckDB.',
                 },
-                {
-                    badge: 'DBT & Flow',
-                    title: 'DBT Studio & Execution Chains',
-                    description: 'Visually orchestrate local Python models and dbt-core profiles without leaving the IDE. Build sequential ETL processes via Execution Chains for native data engineering workflows.',
-                    highlights: ['DBT Core Integration', 'Visual orchestration', 'Execution chains', 'Local ETL pipelines'],
+                profiler: {
+                    title: 'Perfilado & Plan',
+                    desc: 'EDA con storytelling y EXPLAIN ANALYZE con pistas de optimización.',
                 },
-            ],
-        },
-
-        // AI Section
-        ai: {
-            badge: 'AmoxSQL AI',
-            title1: 'Intelligence That',
-            title2: 'Respects Your Privacy',
-            subtitle: 'Choose between 100% offline local AI or cloud-powered reasoning. Either way, your schema is injected as context to prevent hallucinations.',
-            localTitle: 'Local Mode',
-            localBadge: '100% Offline · Ollama',
-            localDesc: 'Your data never leaves your machine. Connect to a local Ollama server running models like Qwen 2.5 Coder or Llama 3.2. Perfect for regulated industries (GDPR, HIPAA).',
-            localFeat1: 'Data never leaves your machine',
-            localFeat2: 'Download models from within the IDE',
-            cloudTitle: 'Cloud Mode',
-            cloudBadge: 'Google Gemini API',
-            cloudDesc: "Access Google's state-of-the-art Gemini models for superior reasoning. Built-in daily free-tier usage tracking keeps you in control of your API costs with a visual counter in the Settings panel.",
-            cloudFeat1: 'State-of-the-art reasoning',
-            cloudFeat2: 'Daily usage tracking built-in',
-            ragTitle: 'Smart Context Engine (RAG)',
-            ragDesc: "AmoxSQL doesn't just forward your text to AI. It scans your database topology in real-time, injects table schemas, column names, and types into the system prompt, and enforces DuckDB dialect rules — eliminating hallucinations and producing accurate SQL every time.",
-            ragStep1: 'Schema auto-detection',
-            ragStep2: 'Dynamic prompt injection',
-            ragStep3: 'DuckDB dialect enforcement',
-            ragStep4: 'Clean SQL output parsing',
-        },
-
-        // Use Cases
-        useCases: {
-            badge: 'Use Cases',
-            title1: 'Built for',
-            title2: 'Real Scenarios',
-            subtitle: 'From strict corporate compliance to supersonic feature extraction.',
-            items: [
-                {
-                    title: 'Privacy-First Compliance',
-                    desc: 'Audit millions of transactional rows without exposing patient or corporate data to third-party clouds. 100% offline analysis ensures GDPR and HIPAA compliance.',
-                },
-                {
-                    title: 'Zero-Latency Prototyping',
-                    desc: 'Skip the pain of setting up Postgres servers. Read local Parquets and CSVs instantly — prototype ML features and visualizations in milliseconds, not hours.',
-                },
-                {
-                    title: 'Executive Reporting',
-                    desc: 'Generate interactive SQL Notebooks with charts, pivot tables, and storytelling annotations. Export pixel-perfect PDF reports for your stakeholders on the fly.',
-                },
-            ],
-        },
-
-        // Origin Story
-        origin: {
-            badge: 'Origin Story',
-            title1: 'The Story Behind',
-            title2: 'the Name',
-            quote: 'The name "Amox" derives from the Nahuatl word',
-            quoteWord: 'Amoxtli',
-            quoteEnd: ', meaning "book" or "codex". These sacred repositories were used by ancient Mesoamerican scribes to record history, astronomical calculations, and knowledge.',
-            desc: 'is the spiritual successor to those ancient tools — a modern, digital codex designed for the data age. The glowing glyph represents the fusion of ancient structure with modern energy: the precision of a data schema interacting with the light of clear visualizations.',
-            tagline: 'Built from Latin America for the global developer community.',
-        },
-
-        // Download CTA
-        cta: {
-            title1: 'Ready to Transform Your',
-            title2: 'Data Workflow',
-            subtitle: 'Download AmoxSQL and start analyzing data locally in seconds. No cloud setup. No account needed. Just powerful SQL.',
-            downloadBtn: 'Download AmoxSQL',
-            sponsorBtn: 'Support the Project',
-            badgeWindows: 'Windows',
-            badgeSource: 'Source Available',
-            badgeLocal: '100% Local',
-        },
-
-        // Footer
-        footer: {
-            tagline: 'The modern, local-first SQL IDE for DuckDB. Built with privacy and performance in mind.',
-            tagline2: 'From Latin America to the World.',
-            productHeading: 'Product',
-            resourcesHeading: 'Resources',
-            legalHeading: 'Legal',
-            features: 'Features',
-            aiAssistant: 'AI Assistant',
-            download: 'Download',
-            documentation: 'Documentation',
-            originStory: 'Origin Story',
-            license: 'Source Available License',
-            createdWith: 'Created with',
-            by: 'by',
-            starOnGithub: 'Star on GitHub',
-            sponsor: 'Sponsor',
-        },
-
-        // Docs
-        docs: {
-            sidebarTitle: 'Documentation',
-            items: {
-                overview: 'Overview',
-                architecture: 'Core Architecture',
-                'db-management': 'Database Management',
-                'sql-notebooks': 'SQL Notebooks',
-                'data-vis': 'Data Visualization',
-                'ai-integration': 'AI Integration',
-                debugging: 'Debugging & IO',
-                'dbt-studio': 'DBT Studio',
-                'data-engineering': 'Data Engineering',
-                'ide-configuration': 'IDE Configuration',
             },
+        },
+        local: {
+            title1: 'Tus datos nunca salen de tu máquina.',
+            titleAccent: 'Ni siquiera para pensar.',
+            subtitle: 'El motor es DuckDB local. La IA puede ser Ollama local. La nube es opcional, nunca obligatoria.',
+        },
+        downloads: {
+            kicker: 'Descargar',
+            title: 'Instálalo hoy',
+            subtitle: 'Instaladores pre-construidos en GitHub Releases · compilar desde fuente es siempre gratis.',
+            windowsOs: 'Windows 10 / 11 · x64',
+            windowsName: 'AmoxSQL Setup',
+            windowsDetail: 'Instalador NSIS',
+            windowsBtn: 'Descargar .exe',
+            macOs: 'macOS · Apple Silicon',
+            macDetail: 'M1–M4 · primer arranque:',
+            macBtn: 'Descargar .dmg',
+            beta: 'beta',
+            sourceNote: '¿Prefieres el código?',
+            sourceLink: 'Compila desde fuente en dos comandos →',
+        },
+        engine: 'Impulsado por',
+        footer: {
+            license: 'AmoxSQL Community License',
+            amoxtli: 'Amoxtli',
+            amoxtliNote: ', códice en náhuatl',
+            docs: 'Documentación',
+            changelog: 'Changelog',
+            sponsor: 'Sponsor',
         },
     },
 
-    es: {
-        // Navbar
+    en: {
         nav: {
-            home: 'Inicio',
-            features: 'Features',
+            capabilities: 'Capabilities',
+            privacy: 'Privacy',
             docs: 'Docs',
-            sponsor: 'Sponsor',
+            github: 'GitHub',
+            download: 'Download',
         },
-
-        // Hero
         hero: {
-            badge: 'Construido para DuckDB · v1.9.9',
-            titleMuted1: 'El Códice Moderno',
-            titleMuted2: 'para',
-            titleAccent: 'Local Data Analysis',
-            subtitle: 'Un IDE SQL de latencia cero que combina el poder transaccional de DuckDB con IA offline, notebooks interactivos y data visualizations. Tus datasets nunca salen de tu máquina.',
-            downloadBtn: 'Descargar para Windows',
-            githubBtn: 'Ver en GitHub',
-            statRows: 'Filas/seg',
-            statOffline: 'Offline',
-            statCloud: 'Cloud Deps',
+            pill: 'Windows + macOS',
+            title1: 'Your complete data studio,',
+            titleAccent: 'in a single app.',
+            subtitle: 'SQL, notebooks, visualization, reports and AI — on DuckDB, no cloud, on your desktop.',
+            ctaDownload: 'Download free',
+            ctaCapabilities: 'See capabilities',
+            meta: 'Windows · macOS (beta) · building from source is always free',
+            screenshotAlt: 'The AmoxSQL IDE: schema explorer, SQL editor and results table',
         },
-
-        // Tech Strip
-        tech: {
-            label: 'Impulsado por',
-        },
-
-        // Features
-        features: {
-            badge: 'Core Features',
-            title1: 'Todo lo que Necesitas,',
-            title2: 'Nada Extra',
-            subtitle: 'Módulos integrados que reemplazan a todo un stack fragmentado de data tools.',
-            items: [
-                {
-                    badge: 'Monaco Editor',
-                    title: 'Editor SQL de Grado Industrial',
-                    description: 'Impulsado por el mismo motor detrás de VS Code. IntelliSense con autocompletado para el dialecto DuckDB, edición multi-cursor, buscar y reemplazar con regex, y ejecución contextual — selecciona cualquier bloque y corre solo ese query.',
-                    highlights: ['DuckDB IntelliSense', 'Multi-cursors', 'Partial Execution', 'Code folding'],
+        bento: {
+            kicker: 'The whole workflow, in one place',
+            title: 'From query to final report',
+            subtitle: 'Eight integrated tools on a single engine. What used to be five apps is one here.',
+            cards: {
+                storyFlow: {
+                    title: 'Story Flow',
+                    desc: 'Chart types in a 6-stage flow: annotations, KPIs, emphasis and narrative. Your data tells its story.',
                 },
-                {
-                    badge: 'Formato Data Warehouse',
-                    title: 'Deep Table Inspector & ER Diagrams',
-                    description: 'Haz clic derecho en cualquier tabla para un deep-dive visual. Explora Diagramas ER interactivos, evalúa Schema Diffs estructurales y usa el Data Profiler V2 con quality sparklines, paginación de raw data, y el DDL statement original.',
-                    highlights: ['Diagramas ER interactivos', 'Herramienta Schema Diff', 'Data Profiler V2', 'Ingeniería inversa DDL'],
+                dataFlow: {
+                    title: 'Data Flow',
+                    desc: 'Node types to build visual pipelines (DAG) with step execution and AI enrichment.',
                 },
-                {
-                    badge: 'Motor Recharts',
-                    title: 'Visualización Dinámica de Datos',
-                    description: 'Convierte cualquier query en gráficos interactivos al instante. Soporta 8 tipos incluyendo Combo, Funnel y Heatmap con pivot aggregation, reference lines para data storytelling, smart number formatting y exportación PNG a 4x retina.',
-                    highlights: ['8 tipos de gráficos (Funnel, Heatmap)', 'Pivot y agregación', 'Storytelling indicators', 'Exportación PNG 4x'],
+                ai: {
+                    title: 'Agentic AI',
+                    desc: 'Assistant + Deep Dive that explores your database on its own. Local with Ollama or with your cloud provider.',
                 },
-                {
-                    badge: 'Híbrido .sqlnb',
+                editor: {
+                    title: 'SQL editor',
+                    desc: 'Monaco with autocomplete that understands your real schema — including CTE columns — plus CTE debugging.',
+                },
+                notebooks: {
                     title: 'SQL Notebooks',
-                    description: 'Experiencia tipo Jupyter pensada para Análisis de Datos. Combina Markdown con celdas ejecutables de SQL en un nuevo diseño de layout flotante basado en tarjetas (card-based). Cambia al Presentation Mode para un reporte nítido, listo para exportación a PDF.',
-                    highlights: ['Card-based floating layout', 'Markdown + SQL cells', 'Presentation mode', 'Exportar a PDF'],
+                    desc: 'Narrated analyses with reactive cells; export to HTML, Word and PDF.',
                 },
-                {
-                    badge: 'IA Local y Cloud',
-                    title: 'AI Assistant Libre de Alucinaciones',
-                    description: 'Arquitectura agéntica con tool-calling. Conecta modelos Ollama offline para IA 100% privada o usa Google Gemini en la nube. Disfruta de historial de chats persistentes y un motor RAG que previene alucinaciones de código.',
-                    highlights: ['Arquitectura agéntica (tool-calling)', 'Historial de chats persistente', 'Modo 100% offline', 'Schema-aware RAG'],
+                reportFlow: {
+                    title: 'Report Flow',
+                    desc: 'Presentations with refreshable charts; export to editable PowerPoint.',
                 },
-                {
-                    badge: 'Paso a Paso',
-                    title: 'CTE Debugger y Query Plan',
-                    description: 'Haz clic en el ícono de Play junto a tu cláusula WITH para inspeccionar step-by-step los resultados temporales del CTE sin retrabajar queries. Visualiza tu performance con un árbol Elkjs del Execution Plan que localiza e identifica tus bottlenecks.',
-                    highlights: ['Step-through Debugging', 'Elkjs Query Plan', 'Detección de bottlenecks', 'Cost analysis'],
+                dbt: {
+                    title: 'DBT Studio',
+                    desc: 'Models, sources, commands and a lineage graph with dbt + DuckDB.',
                 },
-                {
-                    badge: 'DBT & Flow',
-                    title: 'DBT Studio y Execution Chains',
-                    description: 'Orquesta visualmente modelos locales de Python y perfiles dbt-core sin abandonar tu ambiente. Construye pipelines ordenados de extracción lógica y ETLs vía Execution Chains, apuntando a flujos óptimos de data engineering.',
-                    highlights: ['Integración DBT Core', 'Visual orchestration', 'Execution chains', 'Local ETL pipelines'],
+                profiler: {
+                    title: 'Profiling & Plan',
+                    desc: 'Storytelling EDA and EXPLAIN ANALYZE with optimization hints.',
                 },
-            ],
-        },
-
-        // AI Section
-        ai: {
-            badge: 'AmoxSQL AI',
-            title1: 'Inteligencia que',
-            title2: 'Respeta tu Privacidad',
-            subtitle: 'Elige entre un Local LLM 100% offline o razonamiento veloz Cloud. En cualquier vía, el topology-schema de tu database se inyecta por sistema garantizando precisión quirúrgica y previniendo alucinaciones de código.',
-            localTitle: 'Local Mode',
-            localBadge: '100% Offline · Ollama',
-            localDesc: 'Tus datasets confidenciales y atributos PII nunca escapan de tu equipo lógico. Enlázalo con tu Ollama host interno que procesa modelos geniales como Qwen 2.5 Coder o Llama 3.2. Genial para compliance de alta barrera (GDPR, HIPAA).',
-            localFeat1: 'Datos offline 100% salvos',
-            localFeat2: 'Descarga modelos desde el IDE',
-            cloudTitle: 'Cloud Mode',
-            cloudBadge: 'Google Gemini API',
-            cloudDesc: 'Apalanca tu analítica sobre la destreza lógica asombrosa que disponen de base los modelos Gemini. Un counter local visual en tu panel de Settings te da total Daily Usage tracking del free-tier para ahorrarte costosos gastos de API.',
-            cloudFeat1: 'Razonamiento LLM avanzado',
-            cloudFeat2: 'Daily usage tracking integrado',
-            ragTitle: 'Smart Context Engine (RAG)',
-            ragDesc: 'Amox no es un bot pasivo que empuja tu input "crudo" hacia ChatGPT. Identifica activamente el schema en tiempo real, inyecta catalog de tables y column types para guiar el system prompt evitando subconsultas ineficientes que saturen tu engine.',
-            ragStep1: 'Auto-detección del schema',
-            ragStep2: 'Dynamic prompt payload',
-            ragStep3: 'Enforced DuckDB logic filter',
-            ragStep4: 'Sanitized SQL format parsing',
-        },
-
-        // Use Cases
-        useCases: {
-            badge: 'Business Cases',
-            title1: 'Diseñado para',
-            title2: 'Data Workflows Reales',
-            subtitle: 'Desde estricto Data Governance riguroso hasta exploración veloz de ML features.',
-            items: [
-                {
-                    title: 'Data Privacy & Compliance',
-                    desc: 'Analiza billones de bytes transaccionales y datos PII sensitivos localmente, esquivando riesgos directos de filtraciones corporativas o vulnerabilidad cloud en servidores externos. 100% compliance ready.',
-                },
-                {
-                    title: 'Zero-Latency Prototyping',
-                    desc: 'Rompe barreras levantando conectividad a DuckDB In-Process olvidando dependencias Dev-Ops estrictas de Postgres o Redshift remotos. Ingesta datasets crudos Parquet/CSV con carga veloz de microsegundos reales.',
-                },
-                {
-                    title: 'Executive Reporting',
-                    desc: 'Acelera y empodera el análisis ejecutivo presentando respuestas en tu SQL Notebook mezclado con librerias vectoriales D3. Exporta impresiones de alto valor on-the-fly para C-levels con PDF dashboards listos en 5 segundos.',
-                },
-            ],
-        },
-
-        // Origin Story
-        origin: {
-            badge: 'Origin Story',
-            title1: 'La Historia Detrás',
-            title2: 'del Códice',
-            quote: 'El nombre "Amox" se deriva del vocablo náhuatl',
-            quoteWord: 'Amoxtli',
-            quoteEnd: ', que engloba por completo la concepción semántica de "libro" o "códice". Estos repositorios servían en la Mesoamérica histórica a modo de plataforma perdurable para registrar sabiduría cósmica intachable y observaciones abstractas.',
-            desc: 'nace como una carta de amor técnica emulando dicha mística posicionado como el nuevo Códice Digital que exige verdaderamente tu tiempo de la era Data. El resplandor cian del isotipo alude a la severa rigidez estructural del "Database Schema" chocando con brillantes insights iterativos explayados y moldeables.',
-            tagline: 'Desarrollado en América Latina y diseñado localmente para nutrir la comunidad internacional de datos.',
-        },
-
-        // Download CTA
-        cta: {
-            title1: '¿Listo para Acelerar tu',
-            title2: 'Data Workflow?',
-            subtitle: 'Evade burocracia pesada de infraestructuras, descarga velozmente el instalador y re-conquista visualmente tus analíticas hoy. Nada de cuentas sign-ups remotas; unicamente SQL funcional puro.',
-            downloadBtn: 'Descargar AmoxSQL',
-            sponsorBtn: 'Apoyar el Proyecto',
-            badgeWindows: 'Windows nativo',
-            badgeSource: 'Source Available',
-            badgeLocal: '100% Local',
-        },
-
-        // Footer
-        footer: {
-            tagline: 'IDE nativo ultra optimizado en React de escritorio diseñado especialmente para dominar y escalar el motor estelar de consultas analiticas base-columnares abierto DuckDB. Filosofía central: Absoluto performance local asíncrono y data privacy impenetrable de offline mode.',
-            tagline2: 'Ingeniería Latina y lógica open source exportada a desarrolladores data science global.',
-            productHeading: 'Producto',
-            resourcesHeading: 'Archivos Data',
-            legalHeading: 'Aspecto Legal',
-            features: 'Core Features',
-            aiAssistant: 'AI Agent & RAG',
-            download: 'Instalador Desktop',
-            documentation: 'Reference Docs',
-            originStory: 'Historia del Nombre',
-            license: 'Licenciamiento Source Available',
-            createdWith: 'Elaborado bajo café por',
-            by: '',
-            starOnGithub: 'Danos Star de apoyo en GitHub',
-            sponsor: 'GitHub Sponsor Program',
-        },
-
-        // Docs
-        docs: {
-            sidebarTitle: 'Documentación',
-            items: {
-                overview: 'Visión General',
-                architecture: 'Arquitectura Central',
-                'db-management': 'Gestión de Base de Datos',
-                'sql-notebooks': 'Cuadernos SQL',
-                'data-vis': 'Visualización de Datos',
-                'ai-integration': 'Integración IA',
-                debugging: 'Depuración y E/S',
-                'dbt-studio': 'DBT Studio',
-                'data-engineering': 'Ingeniería de Datos',
-                'ide-configuration': 'Configuración del IDE',
             },
+        },
+        local: {
+            title1: 'Your data never leaves your machine.',
+            titleAccent: 'Not even to think.',
+            subtitle: 'The engine is local DuckDB. The AI can be local Ollama. The cloud is optional, never required.',
+        },
+        downloads: {
+            kicker: 'Download',
+            title: 'Install it today',
+            subtitle: 'Pre-built installers on GitHub Releases · building from source is always free.',
+            windowsOs: 'Windows 10 / 11 · x64',
+            windowsName: 'AmoxSQL Setup',
+            windowsDetail: 'NSIS installer',
+            windowsBtn: 'Download .exe',
+            macOs: 'macOS · Apple Silicon',
+            macDetail: 'M1–M4 · first launch:',
+            macBtn: 'Download .dmg',
+            beta: 'beta',
+            sourceNote: 'Prefer the code?',
+            sourceLink: 'Build from source in two commands →',
+        },
+        engine: 'Powered by',
+        footer: {
+            license: 'AmoxSQL Community License',
+            amoxtli: 'Amoxtli',
+            amoxtliNote: ', codex in Nahuatl',
+            docs: 'Documentation',
+            changelog: 'Changelog',
+            sponsor: 'Sponsor',
         },
     },
 };
 
-const LanguageContext = createContext();
+const LanguageContext = createContext(null);
+
+function detectLang() {
+    try {
+        const saved = localStorage.getItem('amoxsql-landing-lang');
+        if (saved === 'es' || saved === 'en') return saved;
+    } catch { /* localStorage no disponible */ }
+    const nav = (typeof navigator !== 'undefined' && navigator.language) || 'en';
+    return nav.toLowerCase().startsWith('es') ? 'es' : 'en';
+}
 
 export function LanguageProvider({ children }) {
-    const [lang, setLang] = useState(() => {
-        try {
-            return localStorage.getItem('amoxsql-lang') || 'en';
-        } catch {
-            return 'en';
-        }
-    });
+    const [lang, setLangState] = useState(detectLang);
 
     useEffect(() => {
-        try {
-            localStorage.setItem('amoxsql-lang', lang);
-        } catch (e) { 
-            // LocalStorage might be blocked
-            console.warn('Failed to save language preference', e);
-        }
+        document.documentElement.lang = lang;
+        try { localStorage.setItem('amoxsql-landing-lang', lang); } catch { /* noop */ }
     }, [lang]);
 
-    const t = (key) => {
-        const keys = key.split('.');
-        let value = translations[lang];
-        for (const k of keys) {
-            value = value?.[k];
-        }
-        return value ?? key;
-    };
+    const setLang = (next) => setLangState(next === 'es' ? 'es' : 'en');
+
+    // t('hero.title1') → valor (string u objeto) siguiendo la ruta con puntos
+    const t = (path) => path.split('.').reduce((acc, key) => (acc == null ? acc : acc[key]), translations[lang]);
 
     return (
         <LanguageContext.Provider value={{ lang, setLang, t }}>
@@ -412,11 +209,9 @@ export function LanguageProvider({ children }) {
     );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
+// eslint-disable-next-line react-refresh/only-export-components -- provider y hook conviven a propósito
 export function useTranslation() {
-    const context = useContext(LanguageContext);
-    if (!context) {
-        throw new Error('useTranslation must be used within a LanguageProvider');
-    }
-    return context;
+    const ctx = useContext(LanguageContext);
+    if (!ctx) throw new Error('useTranslation must be used within LanguageProvider');
+    return ctx;
 }
